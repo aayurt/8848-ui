@@ -11,19 +11,22 @@
   },
   "dependencies": {
     "@aayurt/8848-ui-core": "workspace:*",
-    "@aayurt/8848-ui-react": "workspace:*",
     "@aayurt/8848-ui-hooks": "workspace:*",
+    "@aayurt/8848-ui-react": "workspace:*",
+    "lucide-react": "^0.441.0",
     "next": "^15.0.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "lucide-react": "^0.441.0"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@aayurt/8848-ui-eslint-config": "workspace:*",
     "@aayurt/8848-ui-tsconfig": "workspace:*",
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^22.5.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^4.0.0",
     "typescript": "^5.5.4"
   }
 }

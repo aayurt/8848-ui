@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Toaster } from "@aayurt/8848-ui-react";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -35,6 +36,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-[#09090B] text-[#FAFAFA] font-sans antialiased selection:bg-alpine-500/20 selection:text-alpine-300">
+        <Toaster />
         {children}
       </body>
     </html>
