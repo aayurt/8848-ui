@@ -7,6 +7,8 @@ export * from "./tooltip";
 export * from "./dropdown-menu";
 export * from "./switch";
 export * from "./checkbox";
+export * from "./select";
+export * from "./radio-group";
 export * from "./label";
 export * from "./separator";
 export * from "./badge";

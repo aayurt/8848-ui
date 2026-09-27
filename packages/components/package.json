@@ -20,6 +20,8 @@
     "./dropdown-menu": "./src/dropdown-menu/index.ts",
     "./switch": "./src/switch/index.ts",
     "./checkbox": "./src/checkbox/index.ts",
+    "./select": "./src/select/index.ts",
+    "./radio-group": "./src/radio-group/index.ts",
     "./agentic": "./src/agentic/index.ts"
   },
   "scripts": {
