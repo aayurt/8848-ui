@@ -19,7 +19,8 @@
     "./tooltip": "./src/tooltip/index.ts",
     "./dropdown-menu": "./src/dropdown-menu/index.ts",
     "./switch": "./src/switch/index.ts",
-    "./checkbox": "./src/checkbox/index.ts"
+    "./checkbox": "./src/checkbox/index.ts",
+    "./agentic": "./src/agentic/index.ts"
   },
   "scripts": {
     "build": "tsc --noEmit",

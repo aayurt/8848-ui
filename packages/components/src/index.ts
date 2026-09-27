@@ -11,3 +11,4 @@ export * from "./label";
 export * from "./separator";
 export * from "./badge";
 export * from "./avatar";
+export * from "./agentic";
