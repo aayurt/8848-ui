@@ -1,228 +1,119 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { X } from "lucide-react";
 import { cn } from "@aayurt/8848-ui-utils";
 
-const dialogVariants = cva(
-  "hidden fixed inset-0 z-50",
-  {
-    variants: {
-      variant: {
-        default: "flex items-center justify-center",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
+const Dialog = DialogPrimitive.Root;
+const DialogTrigger = DialogPrimitive.Trigger;
+const DialogPortal = DialogPrimitive.Portal;
+const DialogClose = DialogPrimitive.Close;
 
-export interface DialogTriggerProps
-  extends React.ComponentPropsWithoutRef<"button"> {
-  asChild?: boolean;
-}
+const DialogOverlay = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Overlay>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Overlay
+    ref={ref}
+    className={cn(
+      "fixed inset-0 z-50 bg-black/50 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      className
+    )}
+    {...props}
+  />
+));
+DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
-export const DialogTrigger = React.forwardRef<HTMLButtonElement, DialogTriggerProps>(
-  ({ className, asChild = false, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
-    return (
-      <Comp
-        ref={ref}
-        className={cn("inline-flex items-center justify-center gap-2 rounded-ridge px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50", className)}
-        {...props}
-      >
-        {children}
-      </Comp>
-    );
-  }
-);
-DialogTrigger.displayName = "DialogTrigger";
-
-export interface DialogContentProps
-  extends React.ComponentPropsWithoutRef<"div"> {
-  asChild?: boolean;
-}
-
-export const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
-  ({ className, asChild = false, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "div";
-    return (
-      <Comp
-        ref={ref}
-        className={cn(
-          "bg-slate-900 p-6 rounded-ridge shadow-expedition max-w-md w-full items-center justify-center text-sm align-middle",
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </Comp>
-    );
-  }
-);
-DialogContent.displayName = "DialogContent";
-
-export interface DialogOverlayProps
-  extends React.ComponentPropsWithoutRef<"div"> {
-  asChild?: boolean;
-}
-
-export const DialogOverlay = React.forwardRef<HTMLDivElement, DialogOverlayProps>(
-  ({ className, asChild = false, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "div";
-    return (
-      <Comp
-        ref={ref}
-        className={cn("fixed inset-0 bg-black/60 backdrop-blur-sm z-40", className)}
-        {...props}
-      />
-    );
-  }
-);
-DialogOverlay.displayName = "DialogOverlay";
-
-export interface DialogCloseProps
-  extends React.ComponentPropsWithoutRef<"button"> {
-  asChild?: boolean;
-}
-
-export const DialogClose = React.forwardRef<HTMLButtonElement, DialogCloseProps>(
-  ({ className, asChild = false, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
-    return (
-      <Comp
-        ref={ref}
-        className={cn("p-2 rounded-pointer hover:bg-slate-200 dark:hover:bg-slate-700", className)}
-        {...props}
-      >
-        {children}
-      </Comp>
-    );
-  }
-);
-DialogClose.displayName = "DialogClose";
-
-export interface DialogHeaderProps
-  extends React.ComponentPropsWithoutRef<"div"> {
-  asChild?: boolean;
-}
-
-export const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
-  ({ className, asChild = false, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "div";
-    return (
-      <Comp
-        ref={ref}
-        className={cn("flex items-center justify-between pb-3", className)}
-        {...props}
-      >
-        {children}
-      </Comp>
-    );
-  }
-);
-DialogHeader.displayName = "DialogHeader";
-
-export interface DialogFooterProps
-  extends React.ComponentPropsWithoutRef<"div"> {
-  asChild?: boolean;
-}
-
-export const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
-  ({ className, asChild = false, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "div";
-    return (
-      <Comp
-        ref={ref}
-        className={cn("flex items-center justify-end pt-3", className)}
-        {...props}
-      >
-        {children}
-      </Comp>
-    );
-  }
-);
-DialogFooter.displayName = "DialogFooter";
-
-export interface DialogTitleProps
-  extends React.ComponentPropsWithoutRef<"div"> {
-  asChild?: boolean;
-}
-
-export const DialogTitle = React.forwardRef<HTMLDivElement, DialogTitleProps>(
-  ({ className, asChild = false, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "div";
-    return (
-      <Comp
-        ref={ref}
-        className={cn("text-slate-100 text-xl font-semibold tracking-tight", className)}
-        {...props}
-      >
-        {children}
-      </Comp>
-    );
-  }
-);
-DialogTitle.displayName = "DialogTitle";
-
-export interface DialogDescriptionProps
-  extends React.ComponentPropsWithoutRef<"div"> {
-  asChild?: boolean;
-}
-
-export const DialogDescription = React.forwardRef<HTMLDivElement, DialogDescriptionProps>(
-  ({ className, asChild = false, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "div";
-    return (
-      <Comp
-        ref={ref}
-        className={cn("text-slate-400 text-sm mt-1", className)}
-        {...props}
-      >
-        {children}
-      </Comp>
-    );
-  }
-);
-DialogDescription.displayName = "DialogDescription";
-
-export const DialogPortal = React.forwardRef<
-  HTMLElement,
-  React.HTMLAttributes<HTMLElement>
->(({ className, children, ...props }, ref) => {
-  return (
-    <div
+const DialogContent = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
+>(({ className, children, ...props }, ref) => (
+  <DialogPortal>
+    <DialogOverlay />
+    <DialogPrimitive.Content
       ref={ref}
-      className={cn("fixed inset-0 z-40", className)}
+      className={cn(
+        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border border-slate-200 bg-white p-6 shadow-expedition duration-normal sm:rounded-peak dark:border-slate-800 dark:bg-slate-950",
+        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
+        className
+      )}
       {...props}
     >
       {children}
-    </div>
-  );
-});
-DialogPortal.displayName = "DialogPortal";
+      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-valley p-1 text-slate-400 opacity-70 transition-opacity hover:opacity-100 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none dark:hover:bg-slate-800 dark:text-slate-500">
+        <X className="h-4 w-4" />
+        <span className="sr-only">Close</span>
+      </DialogPrimitive.Close>
+    </DialogPrimitive.Content>
+  </DialogPortal>
+));
+DialogContent.displayName = DialogPrimitive.Content.displayName;
 
-export const Dialog = React.forwardRef<
-  HTMLElement,
-  React.HTMLAttributes<HTMLElement>
->(({ className, children, ...props }, ref) => {
-  return (
-    <div
-      ref={ref}
-      className={cn("hidden w-full max-w-md bg-slate-900 rounded-ridge p-6 shadow-expedition", className)}
-      {...props}
-    >
-      <DialogOverlay />
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>{children}</DialogTitle>
-        </DialogHeader>
-      </DialogContent>
-    </div>
-  );
-});
-Dialog.displayName = "Dialog";
+const DialogHeader = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cn(
+      "flex flex-col space-y-1.5 text-center sm:text-left",
+      className
+    )}
+    {...props}
+  />
+);
+DialogHeader.displayName = "DialogHeader";
 
-export { Dialog, DialogPortal, DialogOverlay, DialogClose, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription };
+const DialogFooter = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cn(
+      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+      className
+    )}
+    {...props}
+  />
+);
+DialogFooter.displayName = "DialogFooter";
+
+const DialogTitle = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Title>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Title
+    ref={ref}
+    className={cn(
+      "text-lg font-semibold leading-none tracking-tight text-slate-900 dark:text-slate-100",
+      className
+    )}
+    {...props}
+  />
+));
+DialogTitle.displayName = DialogPrimitive.Title.displayName;
+
+const DialogDescription = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Description
+    ref={ref}
+    className={cn("text-sm text-slate-500 dark:text-slate-400", className)}
+    {...props}
+  />
+));
+DialogDescription.displayName = DialogPrimitive.Description.displayName;
+
+export {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogClose,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+};
