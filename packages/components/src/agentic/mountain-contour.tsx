@@ -10,7 +10,7 @@ export interface MountainContourProps extends React.SVGAttributes<SVGSVGElement>
 }
 
 export const MountainContour = React.forwardRef<SVGSVGElement, MountainContourProps>(
-  ({ className, density = "normal", elevationLabel = "8,848 m", showPeak = true, ...props }, ref) => {
+  ({ className, density: _density = "normal", elevationLabel = "8,848 m", showPeak = true, ...props }, ref) => {
     return (
       <div className={cn("relative w-full overflow-hidden select-none pointer-events-none", className)}>
         <svg

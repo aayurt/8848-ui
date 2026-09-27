@@ -8,12 +8,10 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-  Badge,
   Input,
   Tabs,
   TabsList,
   TabsTrigger,
-  TabsContent,
   Switch,
   Checkbox,
   Label,
@@ -29,7 +27,7 @@ import {
   ToolCallInspector,
   ApprovalPrompt,
 } from "@aayurt/8848-ui-react";
-import { Github, Terminal, Mountain, Layers, Cpu, ShieldCheck } from "lucide-react";
+import { Github, Mountain } from "lucide-react";
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = React.useState("summit");
