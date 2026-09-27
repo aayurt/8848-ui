@@ -64,26 +64,28 @@
 ---
 
 ## Phase 2: Feedback & Overlays (Equipment)
-- [ ] **Dialog & Alert Dialog** (Modal, Trigger, Portal, Content, Focus Trap)
-- [ ] **Dropdown Menu** (Radix Menu, Items, Groups, Shortcuts)
-- [ ] **Tooltip** (Delayed hover, trigger, arrow)
+- [x] **Dialog & Alert Dialog** (Modal, Trigger, Portal, Content, Focus Trap)
+- [x] **Dropdown Menu** (Radix Menu, Items, Groups, Shortcuts)
+- [x] **Tooltip** (Delayed hover, trigger, arrow)
 - [ ] **Toast** (Sonner integration with high-altitude status styling)
-- [ ] **Switch / Checkbox / Radio**
-- [ ] **Tabs** (Contour tabs, line indicator, keyboard navigation)
+- [x] **Switch / Checkbox / Radio**
+- [x] **Tabs** (Contour tabs, line indicator, keyboard navigation)
 
 ---
 
 ## Phase 3: Expedition Patterns (Agentic & Specialized)
-- [ ] **Agent Execution Pipeline Card** (Elevation milestones: 6,240m Planning → 8,848m Summit)
-- [ ] **Tool Call Inspector** (Collapsible stream logs, execution timing, input/output inspection)
-- [ ] **Contour & Topo Grid Backgrounds** (SVG/CSS pattern generator utilities)
-- [ ] **Monospace Telemetry Chips** (Altitude, Token usage, Latency meters)
+- [x] **Agent Execution Pipeline Card** (Elevation milestones: 6,240m Planning → 8,848m Summit)
+- [x] **Tool Call Inspector** (Collapsible stream logs, execution timing, input/output inspection)
+- [x] **Contour & Topo Grid Backgrounds** (SVG/CSS pattern generator utilities)
+- [x] **Monospace Telemetry Chips** (Altitude, Token usage, Latency meters)
+- [x] **Approval Prompt** (Human-in-the-loop action authorization card)
+- [x] **Executor Node** (Status tracking node for autonomous agent workers)
 
 ---
 
 ## Phase 4: Summit & Complex Workflows
 - [ ] **Form Controller** (React Hook Form + Zod validation wrapper)
-- [ ] **Select / Combobox** (Searchable dropdown with keyboard navigation)
+- [x] **Select / Combobox** (Searchable dropdown with keyboard navigation)
 - [ ] **Data Table** (TanStack Table integration with mountain pagination)
 - [ ] **Command Palette** (KBar / CMDK style launcher)
 
