@@ -9,7 +9,6 @@ const nextConfig = {
   ],
   experimental: {
     optimizePackageImports: [
-      "@aayurt/8848-ui-react",
       "lucide-react",
     ],
   },

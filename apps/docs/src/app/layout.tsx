@@ -14,6 +14,26 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                  for (var reg of registrations) {
+                    reg.unregister();
+                  }
+                });
+                if ('caches' in window) {
+                  caches.keys().then(function(names) {
+                    for (var name of names) caches.delete(name);
+                  });
+                }
+              }
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-screen bg-[#09090B] text-[#FAFAFA] font-sans antialiased selection:bg-alpine-500/20 selection:text-alpine-300">
         {children}
       </body>
