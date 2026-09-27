@@ -1,0 +1,54 @@
+{
+  "name": "@aayurt/8848-ui-react",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./button": "./src/button/index.ts",
+    "./input": "./src/input/index.ts",
+    "./card": "./src/card/index.ts",
+    "./label": "./src/label/index.ts",
+    "./separator": "./src/separator/index.ts",
+    "./badge": "./src/badge/index.ts",
+    "./avatar": "./src/avatar/index.ts"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "dev": "tsc --noEmit --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --max-warnings 0",
+    "test": "vitest run",
+    "test:ui": "vitest --ui"
+  },
+  "dependencies": {
+    "@aayurt/8848-ui-core": "workspace:*",
+    "@aayurt/8848-ui-utils": "workspace:*",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-separator": "^1.1.0",
+    "@radix-ui/react-avatar": "^1.1.0",
+    "@radix-ui/react-badge": "^1.1.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.2",
+    "class-variance-authority": "^0.7.0",
+    "lucide-react": "^0.441.0"
+  },
+  "devDependencies": {
+    "@aayurt/8848-ui-eslint-config": "workspace:*",
+    "@aayurt/8848-ui-tsconfig": "workspace:*",
+    "@testing-library/react": "^16.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.5.4",
+    "vitest": "^2.1.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

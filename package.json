@@ -1,0 +1,39 @@
+{
+  "name": "8848-ui",
+  "version": "0.0.0",
+  "private": true,
+  "description": "8848 UI — Mountain-inspired design system for modern agentic interfaces",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "build:docs": "turbo run build --filter=@8848-ui/docs",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "test:ui": "turbo run test:ui",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md,css}\"",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "turbo run build && changeset publish",
+    "clean": "turbo run clean && rm -rf node_modules .turbo",
+    "component:new": "node scripts/create-component.js"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.7",
+    "@types/node": "^22.5.0",
+    "eslint": "^9.10.0",
+    "prettier": "^3.3.3",
+    "turbo": "^2.1.2",
+    "typescript": "^5.5.4"
+  },
+  "packageManager": "pnpm@9.9.0",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "react": "19.0.0-rc-69d4b800-20241021",
+      "react-dom": "19.0.0-rc-69d4b800-20241021"
+    }
+  }
+}

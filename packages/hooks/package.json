@@ -1,0 +1,37 @@
+{
+  "name": "@aayurt/8848-ui-hooks",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./use-media-query": "./src/use-media-query.ts",
+    "./use-prefers-reduced-motion": "./src/use-prefers-reduced-motion.ts",
+    "./use-id": "./src/use-id.ts",
+    "./use-controllable-state": "./src/use-controllable-state.ts",
+    "./use-event-listener": "./src/use-event-listener.ts"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "dev": "tsc --noEmit --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --max-warnings 0",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@aayurt/8848-ui-utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@aayurt/8848-ui-eslint-config": "workspace:*",
+    "@aayurt/8848-ui-tsconfig": "workspace:*",
+    "@types/react": "^19.0.0",
+    "react": "^19.0.0",
+    "typescript": "^5.5.4",
+    "vitest": "^2.1.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  }
+}

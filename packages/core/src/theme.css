@@ -1,0 +1,293 @@
+/**
+ * 8848 UI Theme — CSS Variables
+ * Mountain expedition metaphor: Basecamp → Routes → Equipment → Summit
+ * Light/Dark mode via class strategy
+ * Compatible with Tailwind CSS v4
+ */
+
+@import "tailwindcss";
+
+@theme inline {
+  /* Mountain color palette (OKLCH) */
+  --color-mountain-snow: oklch(0.98 0.01 280);
+  --color-mountain-ice: oklch(0.94 0.02 270);
+
+  --color-slate-50: oklch(0.97 0.02 280);
+  --color-slate-100: oklch(0.92 0.03 270);
+  --color-slate-200: oklch(0.84 0.04 260);
+  --color-slate-300: oklch(0.70 0.04 250);
+  --color-slate-400: oklch(0.55 0.05 240);
+  --color-slate-500: oklch(0.42 0.05 235);
+  --color-slate-600: oklch(0.32 0.04 240);
+  --color-slate-700: oklch(0.25 0.04 250);
+  --color-slate-800: oklch(0.18 0.03 260);
+  --color-slate-900: oklch(0.12 0.02 270);
+  --color-slate-950: oklch(0.05 0.01 270);
+
+  --color-alpine-50: oklch(0.95 0.03 250);
+  --color-alpine-100: oklch(0.90 0.06 250);
+  --color-alpine-200: oklch(0.82 0.10 250);
+  --color-alpine-300: oklch(0.72 0.14 250);
+  --color-alpine-400: oklch(0.63 0.17 250);
+  --color-alpine-500: oklch(0.55 0.18 250);   /* Brand */
+  --color-alpine-600: oklch(0.48 0.16 250);
+  --color-alpine-700: oklch(0.40 0.14 250);
+  --color-alpine-800: oklch(0.33 0.12 250);
+  --color-alpine-900: oklch(0.27 0.10 250);
+  --color-alpine-950: oklch(0.20 0.08 250);
+
+  --color-sunrise-50: oklch(0.97 0.02 35);
+  --color-sunrise-100: oklch(0.93 0.04 35);
+  --color-sunrise-200: oklch(0.86 0.08 35);
+  --color-sunrise-300: oklch(0.78 0.12 35);
+  --color-sunrise-400: oklch(0.71 0.16 35);
+  --color-sunrise-500: oklch(0.65 0.18 35);   /* Accent */
+  --color-sunrise-600: oklch(0.58 0.16 35);
+  --color-sunrise-700: oklch(0.48 0.14 35);
+  --color-sunrise-800: oklch(0.38 0.12 35);
+  --color-sunrise-900: oklch(0.30 0.10 35);
+  --color-sunrise-950: oklch(0.22 0.08 35);
+
+  --color-forest-50: oklch(0.96 0.02 150);
+  --color-forest-100: oklch(0.91 0.04 150);
+  --color-forest-200: oklch(0.83 0.08 150);
+  --color-forest-300: oklch(0.73 0.12 150);
+  --color-forest-400: oklch(0.62 0.15 150);
+  --color-forest-500: oklch(0.53 0.16 150);
+  --color-forest-600: oklch(0.44 0.14 150);
+  --color-forest-700: oklch(0.35 0.12 150);
+  --color-forest-800: oklch(0.27 0.10 150);
+  --color-forest-900: oklch(0.21 0.08 150);
+  --color-forest-950: oklch(0.15 0.06 150);
+
+  --color-earth-50: oklch(0.97 0.02 60);
+  --color-earth-100: oklch(0.92 0.04 60);
+  --color-earth-200: oklch(0.84 0.07 60);
+  --color-earth-300: oklch(0.74 0.10 60);
+  --color-earth-400: oklch(0.63 0.13 60);
+  --color-earth-500: oklch(0.52 0.14 60);
+  --color-earth-600: oklch(0.43 0.12 60);
+  --color-earth-700: oklch(0.34 0.10 60);
+  --color-earth-800: oklch(0.26 0.08 60);
+  --color-earth-900: oklch(0.20 0.06 60);
+  --color-earth-950: oklch(0.14 0.04 60);
+
+  /* Semantic colors — Light mode (Basecamp) */
+  --color-background: 0 0% 100%;
+  --color-foreground: 250 15% 8%;
+  --color-card: 0 0% 100%;
+  --color-card-foreground: 250 15% 8%;
+  --color-popover: 0 0% 100%;
+  --color-popover-foreground: 250 15% 8%;
+  --color-primary: 250 65% 55%;              /* Alpine blue */
+  --color-primary-foreground: 0 0% 100%;
+  --color-secondary: 250 10% 96%;
+  --color-secondary-foreground: 250 15% 8%;
+  --color-muted: 250 10% 96%;
+  --color-muted-foreground: 250 8% 45%;
+  --color-accent: 250 10% 96%;
+  --color-accent-foreground: 250 15% 8%;
+  --color-destructive: 15 84% 55%;
+  --color-destructive-foreground: 0 0% 100%;
+  --color-border: 250 10% 90%;
+  --color-input: 250 10% 90%;
+  --color-ring: 250 65% 55%;
+
+  /* Chart colors (mountain palette) */
+  --color-chart-1: oklch(0.55 0.18 250);  /* Alpine */
+  --color-chart-2: oklch(0.53 0.16 150);  /* Forest */
+  --color-chart-3: oklch(0.65 0.18 35);   /* Sunrise */
+  --color-chart-4: oklch(0.52 0.14 60);   /* Earth */
+  --color-chart-5: oklch(0.42 0.05 235);  /* Slate */
+
+  /* Sidebar */
+  --color-sidebar-background: 250 10% 98%;
+  --color-sidebar-foreground: 250 15% 12%;
+  --color-sidebar-primary: 250 65% 55%;
+  --color-sidebar-primary-foreground: 0 0% 100%;
+  --color-sidebar-accent: 250 10% 95%;
+  --color-sidebar-accent-foreground: 250 15% 8%;
+  --color-sidebar-border: 250 10% 90%;
+  --color-sidebar-ring: 250 65% 55%;
+
+  /* Contour radius — mountain-inspired */
+  --radius-canyon: 4px;      /* Deep cut */
+  --radius-valley: 8px;      /* Gentle curve */
+  --radius-ridge: 12px;      /* Base radius (rounded-md) */
+  --radius-peak: 16px;       /* Prominent */
+  --radius-summit: 9999px;   /* Full circle */
+
+  /* Elevation shadow — subtle by default */
+  --shadow-basecamp: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+  --shadow-trail: 0 2px 4px -1px rgb(0 0 0 / 0.05);
+  --shadow-ridge: 0 4px 8px -2px rgb(0 0 0 / 0.06);
+  --shadow-summit: 0 8px 16px -4px rgb(0 0 0 / 0.08);
+  --shadow-expedition: 0 16px 32px -8px rgb(0 0 0 / 0.1);
+
+  /* Elevation spacing (meter-based) */
+  --space-basecamp: 0.25rem;   /* 4px  */
+  --space-trail: 0.5rem;       /* 8px  */
+  --space-ridge: 1rem;         /* 16px */
+  --space-summit: 2rem;        /* 32px */
+  --space-expedition: 4rem;    /* 64px */
+
+  /* Animation — smooth elevation */
+  --animate-duration-fast: 150ms;
+  --animate-duration-normal: 200ms;
+  --animate-duration-slow: 300ms;
+  --animate-easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --animate-easing-ascend: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --animate-easing-descend: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+  /* Fonts */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+  --font-display: var(--font-cal-sans), var(--font-sans);
+
+  /* Spacing (Tailwind default 4px base) */
+  --space-px: 1px;
+  --space-0: 0;
+  --space-0-5: 0.125rem;   /* 2px */
+  --space-1: 0.25rem;      /* 4px */
+  --space-1-5: 0.375rem;   /* 6px */
+  --space-2: 0.5rem;       /* 8px */
+  --space-2-5: 0.625rem;   /* 10px */
+  --space-3: 0.75rem;      /* 12px */
+  --space-3-5: 0.875rem;   /* 14px */
+  --space-4: 1rem;         /* 16px */
+  --space-5: 1.25rem;      /* 20px */
+  --space-6: 1.5rem;       /* 24px */
+  --space-7: 1.75rem;      /* 28px */
+  --space-8: 2rem;         /* 32px */
+  --space-9: 2.25rem;      /* 36px */
+  --space-10: 2.5rem;      /* 40px */
+}
+
+/* Light mode (Basecamp) */
+:root {
+  --radius: 0.5rem;  /* rounded-md */
+
+  /* Font CSS variables (set by next/font) */
+  --font-inter: "Inter", system-ui, sans-serif;
+  --font-jetbrains-mono: "JetBrains Mono", monospace;
+  --font-cal-sans: "Cal Sans", var(--font-sans);
+}
+
+/* Dark mode (Night expedition) */
+.dark {
+  --color-background: 250 20% 5%;
+  --color-foreground: 250 10% 95%;
+  --color-card: 250 20% 6%;
+  --color-card-foreground: 250 10% 95%;
+  --color-popover: 250 20% 6%;
+  --color-popover-foreground: 250 10% 95%;
+  --color-primary: 250 65% 60%;
+  --color-primary-foreground: 250 20% 5%;
+  --color-secondary: 250 15% 12%;
+  --color-secondary-foreground: 250 10% 95%;
+  --color-muted: 250 15% 12%;
+  --color-muted-foreground: 250 8% 60%;
+  --color-accent: 250 15% 12%;
+  --color-accent-foreground: 250 10% 95%;
+  --color-destructive: 15 75% 50%;
+  --color-destructive-foreground: 0 0% 100%;
+  --color-border: 250 15% 15%;
+  --color-input: 250 15% 15%;
+  --color-ring: 250 65% 60%;
+
+  --color-sidebar-background: 250 20% 4%;
+  --color-sidebar-foreground: 250 10% 90%;
+  --color-sidebar-primary: 250 65% 60%;
+  --color-sidebar-primary-foreground: 250 20% 5%;
+  --color-sidebar-accent: 250 15% 10%;
+  --color-sidebar-accent-foreground: 250 10% 90%;
+  --color-sidebar-border: 250 15% 12%;
+  --color-sidebar-ring: 250 65% 60%;
+}
+
+/* Base styles */
+* {
+  border-color: hsl(var(--color-border));
+}
+
+body {
+  background-color: hsl(var(--color-background));
+  color: hsl(var(--color-foreground));
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Focus ring — subtle */
+.focus-ring {
+  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+}
+
+.focus-ring:focus-visible {
+  @apply ring-2 ring-ring ring-offset-2 ring-offset-background;
+}
+
+/* Visually hidden */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Selection */
+::selection {
+  background-color: hsl(var(--color-primary) / 0.2);
+  color: hsl(var(--color-primary-foreground));
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--color-muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--color-muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--color-muted-foreground) / 0.5);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mountain utility classes */
+.contour-lines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 19px,
+    hsl(var(--color-border)) 19px,
+    hsl(var(--color-border)) 20px
+  );
+}
+
+.elevation-marker::before {
+  content: attr(data-elevation);
+  @apply absolute -top-6 right-0 text-xs text-muted-foreground font-mono;
+}
