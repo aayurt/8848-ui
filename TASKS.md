@@ -67,7 +67,7 @@
 - [x] **Dialog & Alert Dialog** (Modal, Trigger, Portal, Content, Focus Trap)
 - [x] **Dropdown Menu** (Radix Menu, Items, Groups, Shortcuts)
 - [x] **Tooltip** (Delayed hover, trigger, arrow)
-- [ ] **Toast** (Sonner integration with high-altitude status styling)
+- [x] **Toast** (Sonner integration with high-altitude status styling)
 - [x] **Switch / Checkbox / Radio**
 - [x] **Tabs** (Contour tabs, line indicator, keyboard navigation)
 
@@ -86,8 +86,8 @@
 ## Phase 4: Summit & Complex Workflows
 - [ ] **Form Controller** (React Hook Form + Zod validation wrapper)
 - [x] **Select / Combobox** (Searchable dropdown with keyboard navigation)
-- [ ] **Data Table** (TanStack Table integration with mountain pagination)
-- [ ] **Command Palette** (KBar / CMDK style launcher)
+- [x] **Data Table** (Semantic HTML table primitives with altitude header styling)
+- [x] **Command Palette** (CMDK launcher with Dialog modal)
 
 ---
 
