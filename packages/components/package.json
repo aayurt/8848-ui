@@ -22,6 +22,9 @@
     "./checkbox": "./src/checkbox/index.ts",
     "./select": "./src/select/index.ts",
     "./radio-group": "./src/radio-group/index.ts",
+    "./table": "./src/table/index.ts",
+    "./command": "./src/command/index.ts",
+    "./toast": "./src/toast/index.ts",
     "./agentic": "./src/agentic/index.ts"
   },
   "scripts": {
