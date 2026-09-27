@@ -1,0 +1,7 @@
+{
+  "name": "@aayurt/8848-ui-eslint-config",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.js",
+  "files": ["index.js"]
+}

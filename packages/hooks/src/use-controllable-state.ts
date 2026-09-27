@@ -16,19 +16,21 @@ export function useControllableState<T>({
   value: controlledValue,
   defaultValue,
   onChange,
-}: UseControllableStateProps<T>): [T, React.Dispatch<React.SetStateAction<T>>] {
+}: UseControllableStateProps<T>): [T | undefined, React.Dispatch<React.SetStateAction<T | undefined>>] {
   const isControlled = controlledValue !== undefined;
-  const [uncontrolledValue, setUncontrolledValue] = React.useState(defaultValue);
+  const [uncontrolledValue, setUncontrolledValue] = React.useState<T | undefined>(defaultValue);
   
   const value = isControlled ? controlledValue : uncontrolledValue;
   
-  const setValue: React.Dispatch<React.SetStateAction<T>> = React.useCallback(
+  const setValue: React.Dispatch<React.SetStateAction<T | undefined>> = React.useCallback(
     (next) => {
-      const nextValue = typeof next === "function" ? next(value) : next;
+      const nextValue = typeof next === "function" ? (next as (prev: T | undefined) => T | undefined)(value) : next;
       if (!isControlled) {
         setUncontrolledValue(nextValue);
       }
-      onChange?.(nextValue);
+      if (nextValue !== undefined) {
+        onChange?.(nextValue);
+      }
     },
     [isControlled, onChange, value]
   );

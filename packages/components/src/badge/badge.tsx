@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import * as BadgePrimitive from "@radix-ui/react-badge";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@aayurt/8848-ui-utils";
 
@@ -41,18 +40,18 @@ const badgeVariants = cva(
   }
 );
 
-interface BadgeProps extends React.ComponentPropsWithoutRef<typeof BadgePrimitive.Root>, VariantProps<typeof badgeVariants> {}
+interface BadgeProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof badgeVariants> {}
 
-const Badge = React.forwardRef<React.ElementRef<typeof BadgePrimitive.Root>, BadgeProps>(
+const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
   ({ className, variant, size, ...props }, ref) => (
-    <BadgePrimitive.Root
+    <div
       ref={ref}
       className={cn(badgeVariants({ variant, size, className }))}
       {...props}
     />
   )
 );
-Badge.displayName = BadgePrimitive.Root.displayName;
+Badge.displayName = "Badge";
 
 export { Badge, badgeVariants };
 export type { BadgeProps };

@@ -15,9 +15,10 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "@design-system/*": ["packages/*/src"]
+      "@aayurt/8848-ui-*": ["packages/*/src"],
+      "@aayurt/8848-ui-react/*": ["packages/components/src/*"]
     },
-    "types": ["node", "vitest/globals", "@testing-library/jest-dom"]
+    "types": ["node"]
   },
   "exclude": ["node_modules", "**/dist/**", "**/.next/**", "**/build/**"]
 }
