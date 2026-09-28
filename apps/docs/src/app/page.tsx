@@ -76,6 +76,7 @@ import {
   Sparkles,
   Zap,
 } from "lucide-react";
+import { ThemeToggle } from "../components/theme-toggle";
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = React.useState("summit");
@@ -108,14 +109,14 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col bg-[#09090B] text-[#FAFAFA] antialiased">
+    <div className="relative min-h-screen flex flex-col bg-stone-50 text-stone-900 dark:bg-[#09090B] dark:text-[#FAFAFA] antialiased transition-colors duration-200">
       {/* Top Header */}
-      <header className="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-[#09090B]/85 backdrop-blur-md">
+      <header className="sticky top-0 z-40 w-full border-b border-stone-200 dark:border-white/[0.08] bg-white/80 dark:bg-[#09090B]/85 backdrop-blur-md transition-colors">
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
           <div className="flex items-center gap-4">
-            <span className="flex items-center gap-2 font-bold tracking-tight text-white text-base">
-              <Mountain className="h-4 w-4 text-alpine-400" />
-              8848 <span className="text-white/40 font-mono text-xs">UI</span>
+            <span className="flex items-center gap-2 font-bold tracking-tight text-stone-900 dark:text-white text-base">
+              <Mountain className="h-4 w-4 text-alpine-500 dark:text-alpine-400" />
+              8848 <span className="text-stone-400 dark:text-white/40 font-mono text-xs">UI</span>
             </span>
 
             <TelemetryChip variant="summit" size="sm">
@@ -127,33 +128,33 @@ export default function HomePage() {
             {/* Command Palette Trigger */}
             <button
               onClick={() => setCommandOpen(true)}
-              className="hidden sm:flex items-center gap-2 rounded-valley border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-white/50 hover:border-white/20 hover:text-white transition-all shadow-basecamp"
+              className="hidden sm:flex items-center gap-2 rounded-valley border border-stone-200 dark:border-white/10 bg-stone-100/60 dark:bg-white/[0.03] px-3 py-1.5 text-xs text-stone-500 dark:text-white/50 hover:border-stone-300 dark:hover:border-white/20 hover:text-stone-900 dark:hover:text-white transition-all shadow-basecamp"
             >
               <Search className="h-3.5 w-3.5" />
               <span>Search components...</span>
-              <kbd className="ml-2 font-mono text-[10px] bg-white/10 px-1.5 py-0.5 rounded text-white/70">
+              <kbd className="ml-2 font-mono text-[10px] bg-stone-200 dark:bg-white/10 px-1.5 py-0.5 rounded text-stone-600 dark:text-white/70">
                 ⌘K
               </kbd>
             </button>
 
-            <nav className="flex items-center gap-4 text-xs text-white/70">
+            <nav className="flex items-center gap-4 text-xs text-stone-600 dark:text-white/70">
               <a
                 href="#components"
-                className="hover:text-white transition-colors"
+                className="hover:text-stone-900 dark:hover:text-white transition-colors"
                 onClick={() => setActiveTab("summit")}
               >
                 Summit
               </a>
               <a
                 href="#components"
-                className="hover:text-white transition-colors"
+                className="hover:text-stone-900 dark:hover:text-white transition-colors"
                 onClick={() => setActiveTab("climb")}
               >
                 Equipment
               </a>
               <a
                 href="#components"
-                className="hover:text-white transition-colors"
+                className="hover:text-stone-900 dark:hover:text-white transition-colors"
                 onClick={() => setActiveTab("basecamp")}
               >
                 Foundations
@@ -163,45 +164,48 @@ export default function HomePage() {
                 href="https://github.com/aayurt/8848-ui"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 rounded-valley bg-white/10 px-2.5 py-1 text-white hover:bg-white/20 transition-all"
+                className="flex items-center gap-1.5 rounded-valley bg-stone-100 dark:bg-white/10 px-2.5 py-1 text-stone-800 dark:text-white hover:bg-stone-200 dark:hover:bg-white/20 transition-all border border-stone-200 dark:border-transparent"
               >
                 <Github className="h-3.5 w-3.5" />
                 <span>GitHub</span>
               </a>
+
+              {/* Theme Toggle (Light / Dark) */}
+              <ThemeToggle />
             </nav>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-20 pb-12 border-b border-white/[0.06]">
+      <section className="relative overflow-hidden pt-20 pb-12 border-b border-stone-200 dark:border-white/[0.06] transition-colors">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 mb-6 text-xs font-mono text-white/70">
-            <span className="h-1.5 w-1.5 rounded-full bg-alpine-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-stone-200 dark:border-white/10 bg-white dark:bg-white/[0.03] px-3 py-1 mb-6 text-xs font-mono text-stone-600 dark:text-white/70 shadow-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-alpine-500 dark:bg-alpine-400 animate-pulse" />
             Elevation 8,848m · High-Altitude Developer Environment
           </div>
 
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl text-white font-sans">
+          <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl text-stone-900 dark:text-white font-sans">
             Build at Altitude.
           </h1>
 
-          <p className="mx-auto mt-4 max-w-xl text-base text-white/60 leading-relaxed font-sans">
+          <p className="mx-auto mt-4 max-w-xl text-base text-stone-600 dark:text-white/60 leading-relaxed font-sans">
             A minimal, quiet, Himalayan-inspired design system for modern and
             agentic interfaces. Engineered with Radix primitives, Tailwind CSS, and altitude telemetry.
           </p>
 
           {/* Quick Install Banner */}
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <div className="flex items-center gap-2 rounded-ridge border border-white/15 bg-white/[0.04] px-4 py-2 text-xs font-mono text-white/90 shadow-trail">
-              <Terminal className="h-3.5 w-3.5 text-alpine-400" />
+            <div className="flex items-center gap-2 rounded-ridge border border-stone-300 dark:border-white/15 bg-white dark:bg-white/[0.04] px-4 py-2 text-xs font-mono text-stone-800 dark:text-white/90 shadow-trail">
+              <Terminal className="h-3.5 w-3.5 text-alpine-600 dark:text-alpine-400" />
               <span>pnpm add @aayurt/8848-ui-react @aayurt/8848-ui-core</span>
               <button
                 onClick={copyInstall}
-                className="ml-2 text-white/40 hover:text-white transition-colors"
+                className="ml-2 text-stone-400 dark:text-white/40 hover:text-stone-900 dark:hover:text-white transition-colors"
                 title="Copy command"
               >
                 {copiedInstall ? (
-                  <Check className="h-3.5 w-3.5 text-emerald-400" />
+                  <Check className="h-3.5 w-3.5 text-emerald-500 dark:text-emerald-400" />
                 ) : (
                   <Copy className="h-3.5 w-3.5" />
                 )}

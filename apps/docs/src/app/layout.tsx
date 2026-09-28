@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Toaster } from "@aayurt/8848-ui-react";
+import { ThemeProvider } from "../components/theme-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -35,9 +36,16 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen bg-[#09090B] text-[#FAFAFA] font-sans antialiased selection:bg-alpine-500/20 selection:text-alpine-300">
-        <Toaster />
-        {children}
+      <body className="min-h-screen bg-stone-50 text-stone-900 dark:bg-[#09090B] dark:text-[#FAFAFA] font-sans antialiased selection:bg-alpine-500/20 selection:text-alpine-300 transition-colors duration-200">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <Toaster />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
