@@ -1,6 +1,6 @@
 {
   "name": "@aayurt/8848-ui-mcp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "description": "Model Context Protocol server for the 8848 UI shadcn registry — list, search and fetch components for AI assistants.",
   "keywords": [
@@ -16,7 +16,10 @@
   "bin": {
     "8848-ui-mcp": "./dist/index.js"
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsc -p tsconfig.build.json --watch",
