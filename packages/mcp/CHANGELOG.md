@@ -1,5 +1,12 @@
 # @aayurt/8848-ui-mcp
 
+## 0.2.1
+
+### Patch Changes
+
+- Report the real package version in the MCP handshake instead of a hardcoded string
+
+
 ## 0.2.0
 
 ### Minor Changes

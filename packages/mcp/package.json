@@ -1,6 +1,6 @@
 {
   "name": "@aayurt/8848-ui-mcp",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
   "description": "Model Context Protocol server for the 8848 UI shadcn registry — list, search and fetch components for AI assistants.",
   "keywords": [
