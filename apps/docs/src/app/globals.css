@@ -1,13 +1,20 @@
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
 
-@source "../**/*.{ts,tsx,js,jsx}";
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source "../../../../packages/components/src/**/*.{ts,tsx,js,jsx}";
+@source "./**/*.{ts,tsx,js,jsx}";
 
 @import "@aayurt/8848-ui-core/theme.css";
 
 @layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
   body {
-    @apply bg-[#09090B] text-[#FAFAFA] antialiased;
+    background-color: #09090B;
+    color: #FAFAFA;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
