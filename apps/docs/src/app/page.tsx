@@ -286,10 +286,10 @@ export default function HomePage() {
         {activeTab === "summit" && (
           <section className="space-y-8 animate-in fade-in-50 duration-300">
             <div className="text-center max-w-xl mx-auto space-y-1">
-              <h2 className="text-2xl font-bold tracking-tight text-white font-sans">
+              <h2 className="text-2xl font-bold tracking-tight text-stone-900 dark:text-white font-sans">
                 Summit: Agentic UI
               </h2>
-              <p className="text-xs text-white/50">
+              <p className="text-xs text-stone-600 dark:text-white/50 font-medium">
                 Specialized components for autonomous agent workflows, step telemetry, and human-in-the-loop decisions.
               </p>
             </div>
@@ -415,10 +415,10 @@ export default function HomePage() {
         {activeTab === "climb" && (
           <section className="space-y-12 animate-in fade-in-50 duration-300">
             <div className="text-center max-w-xl mx-auto space-y-1">
-              <h2 className="text-2xl font-bold tracking-tight text-white font-sans">
+              <h2 className="text-2xl font-bold tracking-tight text-stone-900 dark:text-white font-sans">
                 Climb: Equipment Primitives
               </h2>
-              <p className="text-xs text-white/50">
+              <p className="text-xs text-stone-600 dark:text-white/50 font-medium">
                 Complete interactive component building blocks crafted with genuine Radix UI primitives.
               </p>
             </div>
@@ -429,9 +429,11 @@ export default function HomePage() {
               <Card variant="ridge" padding="md">
                 <CardHeader>
                   <CardTitle>Button System</CardTitle>
-                  <CardDescription>Altitude and terrain variants</CardDescription>
+                  <CardDescription className="text-stone-600 dark:text-slate-400">
+                    Altitude and terrain variants
+                  </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-6 pt-2">
                   <div className="flex flex-wrap gap-2">
                     <Button variant="summit" size="sm">Summit</Button>
                     <Button variant="hiker" size="sm">Hiker</Button>
@@ -457,7 +459,9 @@ export default function HomePage() {
               <Card variant="ridge" padding="md">
                 <CardHeader>
                   <CardTitle>Interactive Overlays</CardTitle>
-                  <CardDescription>Dropdown menus and modal dialogs</CardDescription>
+                  <CardDescription className="text-stone-600 dark:text-slate-400">
+                    Dropdown menus and modal dialogs
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center gap-3">
@@ -499,17 +503,17 @@ export default function HomePage() {
                           </DialogDescription>
                         </DialogHeader>
                         <div className="space-y-3 py-2 text-xs">
-                          <div className="flex justify-between border-b border-white/10 pb-1.5">
-                            <span className="text-white/50">TARGET ALTITUDE</span>
-                            <span className="font-mono font-bold text-alpine-400">8,848 m</span>
+                          <div className="flex justify-between border-b border-stone-200 dark:border-white/10 pb-1.5">
+                            <span className="text-stone-600 dark:text-white/50">TARGET ALTITUDE</span>
+                            <span className="font-mono font-bold text-alpine-600 dark:text-alpine-400">8,848 m</span>
                           </div>
-                          <div className="flex justify-between border-b border-white/10 pb-1.5">
-                            <span className="text-white/50">WIND SPEED</span>
-                            <span className="font-mono">14 km/h (Optimal)</span>
+                          <div className="flex justify-between border-b border-stone-200 dark:border-white/10 pb-1.5">
+                            <span className="text-stone-600 dark:text-white/50">WIND SPEED</span>
+                            <span className="font-mono font-medium">14 km/h (Optimal)</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-white/50">BASECAMP FREQ</span>
-                            <span className="font-mono">146.520 MHz</span>
+                            <span className="text-stone-600 dark:text-white/50">BASECAMP FREQ</span>
+                            <span className="font-mono font-medium">146.520 MHz</span>
                           </div>
                         </div>
                         <DialogFooter>
@@ -533,21 +537,25 @@ export default function HomePage() {
 
                   {/* Avatars */}
                   <div className="pt-2">
-                    <Label className="text-xs text-white/50 mb-2 block">Climber Avatars</Label>
-                    <AvatarGroup>
-                      <Avatar>
-                        <AvatarFallback>AS</AvatarFallback>
-                      </Avatar>
-                      <Avatar>
-                        <AvatarFallback>EZ</AvatarFallback>
-                      </Avatar>
-                      <Avatar>
-                        <AvatarFallback>TS</AvatarFallback>
-                      </Avatar>
-                      <Avatar>
-                        <AvatarFallback>NM</AvatarFallback>
-                      </Avatar>
-                    </AvatarGroup>
+                    <Label className="text-xs text-stone-600 dark:text-white/50 mb-2 block font-medium">
+                      Climber Avatars
+                    </Label>
+                    <div className="p-2.5 rounded-valley bg-stone-100/80 dark:bg-white/[0.03] border border-stone-200 dark:border-white/10 w-fit">
+                      <AvatarGroup>
+                        <Avatar className="h-9 w-9">
+                          <AvatarFallback className="p-2 text-xs font-semibold">AS</AvatarFallback>
+                        </Avatar>
+                        <Avatar className="h-9 w-9">
+                          <AvatarFallback className="p-2 text-xs font-semibold">EZ</AvatarFallback>
+                        </Avatar>
+                        <Avatar className="h-9 w-9">
+                          <AvatarFallback className="p-2 text-xs font-semibold">TS</AvatarFallback>
+                        </Avatar>
+                        <Avatar className="h-9 w-9">
+                          <AvatarFallback className="p-2 text-xs font-semibold">NM</AvatarFallback>
+                        </Avatar>
+                      </AvatarGroup>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -556,7 +564,9 @@ export default function HomePage() {
               <Card variant="ridge" padding="md">
                 <CardHeader>
                   <CardTitle>Form Selection</CardTitle>
-                  <CardDescription>Select, switch, and radio groups</CardDescription>
+                  <CardDescription className="text-stone-600 dark:text-slate-400">
+                    Select, switch, and radio groups
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-1.5">
@@ -616,13 +626,13 @@ export default function HomePage() {
             {/* 4. Topographic Data Table */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <h3 className="text-sm font-semibold tracking-tight text-white font-mono uppercase">
+                <h3 className="text-sm font-semibold tracking-tight text-stone-900 dark:text-white font-mono uppercase">
                   Elevation Register (Himalayan 8000ers)
                 </h3>
                 <Badge variant="altitude">5 Peaks Registered</Badge>
               </div>
 
-              <div className="rounded-ridge border border-white/10 overflow-hidden bg-white/[0.02]">
+              <div className="rounded-ridge border border-stone-200 dark:border-white/10 overflow-hidden bg-white dark:bg-white/[0.02] shadow-sm">
                 <Table>
                   <TableHeader>
                     <TableRow>
@@ -635,8 +645,8 @@ export default function HomePage() {
                   </TableHeader>
                   <TableBody>
                     <TableRow>
-                      <TableCell className="font-semibold text-white">Sagarmatha / Everest</TableCell>
-                      <TableCell className="font-mono text-alpine-400 font-bold">8,848 m</TableCell>
+                      <TableCell className="font-semibold text-stone-900 dark:text-white">Sagarmatha / Everest</TableCell>
+                      <TableCell className="font-mono text-alpine-600 dark:text-alpine-400 font-bold">8,848 m</TableCell>
                       <TableCell>Mahalangur Himal</TableCell>
                       <TableCell className="font-mono">1953</TableCell>
                       <TableCell>
@@ -644,8 +654,8 @@ export default function HomePage() {
                       </TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell className="font-semibold text-white">K2 / Chhogori</TableCell>
-                      <TableCell className="font-mono text-white/90">8,611 m</TableCell>
+                      <TableCell className="font-semibold text-stone-900 dark:text-white">K2 / Chhogori</TableCell>
+                      <TableCell className="font-mono text-stone-800 dark:text-white/90">8,611 m</TableCell>
                       <TableCell>Baltoro Karakoram</TableCell>
                       <TableCell className="font-mono">1954</TableCell>
                       <TableCell>
@@ -653,8 +663,8 @@ export default function HomePage() {
                       </TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell className="font-semibold text-white">Kangchenjunga</TableCell>
-                      <TableCell className="font-mono text-white/90">8,586 m</TableCell>
+                      <TableCell className="font-semibold text-stone-900 dark:text-white">Kangchenjunga</TableCell>
+                      <TableCell className="font-mono text-stone-800 dark:text-white/90">8,586 m</TableCell>
                       <TableCell>Kangchenjunga Himal</TableCell>
                       <TableCell className="font-mono">1955</TableCell>
                       <TableCell>
@@ -662,8 +672,8 @@ export default function HomePage() {
                       </TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell className="font-semibold text-white">Lhotse</TableCell>
-                      <TableCell className="font-mono text-white/90">8,516 m</TableCell>
+                      <TableCell className="font-semibold text-stone-900 dark:text-white">Lhotse</TableCell>
+                      <TableCell className="font-mono text-stone-800 dark:text-white/90">8,516 m</TableCell>
                       <TableCell>Everest Massif</TableCell>
                       <TableCell className="font-mono">1956</TableCell>
                       <TableCell>
@@ -671,8 +681,8 @@ export default function HomePage() {
                       </TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell className="font-semibold text-white">Makalu</TableCell>
-                      <TableCell className="font-mono text-white/90">8,485 m</TableCell>
+                      <TableCell className="font-semibold text-stone-900 dark:text-white">Makalu</TableCell>
+                      <TableCell className="font-mono text-stone-800 dark:text-white/90">8,485 m</TableCell>
                       <TableCell>Makalu Himal</TableCell>
                       <TableCell className="font-mono">1955</TableCell>
                       <TableCell>
@@ -690,10 +700,10 @@ export default function HomePage() {
         {activeTab === "basecamp" && (
           <section className="space-y-8 animate-in fade-in-50 duration-300">
             <div className="text-center max-w-xl mx-auto space-y-1">
-              <h2 className="text-2xl font-bold tracking-tight text-white font-sans">
+              <h2 className="text-2xl font-bold tracking-tight text-stone-900 dark:text-white font-sans">
                 Basecamp: Design Foundations
               </h2>
-              <p className="text-xs text-white/50">
+              <p className="text-xs text-stone-600 dark:text-white/50 font-medium">
                 Calm monochrome baseline, Himalayan Blue accent, and altitude elevation scales.
               </p>
             </div>

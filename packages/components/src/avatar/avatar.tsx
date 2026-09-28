@@ -11,7 +11,7 @@ const Avatar = React.forwardRef<
   <AvatarPrimitive.Root
     ref={ref}
     className={cn(
-      "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-summit bg-slate-100 dark:bg-slate-800",
+      "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-summit bg-slate-200 dark:bg-slate-800 border-2 border-white dark:border-[#111113] shadow-sm",
       className
     )}
     {...props}
@@ -39,7 +39,7 @@ const AvatarFallback = React.forwardRef<
     ref={ref}
     delayMs={delayMs}
     className={cn(
-      "flex h-full w-full items-center justify-center rounded-summit bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400",
+      "flex h-full w-full items-center justify-center p-2 rounded-summit bg-stone-100 text-stone-800 font-mono text-xs font-semibold dark:bg-slate-800 dark:text-slate-200",
       className
     )}
     {...props}
@@ -53,7 +53,7 @@ const AvatarGroup = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex -space-x-2 overflow-hidden", className)}
+    className={cn("flex -space-x-2 overflow-hidden p-1", className)}
     {...props}
   />
 ));
