@@ -1,0 +1,37 @@
+{
+  "name": "@aayurt/8848-ui-mcp",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Model Context Protocol server for the 8848 UI shadcn registry — list, search and fetch components for AI assistants.",
+  "keywords": [
+    "model-context-protocol",
+    "mcp",
+    "mcp-server",
+    "design-system",
+    "shadcn",
+    "ai",
+    "claude"
+  ],
+  "type": "module",
+  "bin": {
+    "8848-ui-mcp": "./dist/index.js"
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --max-warnings 0",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@aayurt/8848-ui-eslint-config": "workspace:*",
+    "@aayurt/8848-ui-tsconfig": "workspace:*",
+    "@types/node": "^22.5.0",
+    "typescript": "^5.5.4"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "extends": "@aayurt/8848-ui-tsconfig/base.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "jsx": "react-jsx",
+    "noEmit": true
+  },
+  "include": ["src"]
+}
