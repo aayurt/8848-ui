@@ -16,6 +16,7 @@
     "version": "changeset version",
     "release": "turbo run build && changeset publish",
     "clean": "turbo run clean && rm -rf node_modules .turbo",
+    "deploy:docs": "./scripts/deploy-docs.sh",
     "component:new": "node scripts/create-component.js"
   },
   "devDependencies": {

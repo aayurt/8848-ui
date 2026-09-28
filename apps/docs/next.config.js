@@ -5,6 +5,7 @@ const createMDX = require("@next/mdx")({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  output: "export",
   pageExtensions: ["ts", "tsx", "md", "mdx"],
   transpilePackages: [
     "@aayurt/8848-ui-core",

@@ -9,6 +9,9 @@ build
 out
 coverage
 
+# Generated shadcn registry (rebuilt by scripts/registry-build.mjs on build)
+apps/docs/public/r
+
 # Turborepo
 .turbo
 *.tsbuildinfo
