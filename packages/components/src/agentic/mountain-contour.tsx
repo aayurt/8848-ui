@@ -28,18 +28,18 @@ export const MountainContour = React.forwardRef<SVGSVGElement, MountainContourPr
             <style>{`
               @keyframes cometFly {
                 0% {
-                  transform: translate(0, 0) scale(0.6);
+                  transform: translate(0, 0) scale(0.45);
                   opacity: 0;
                 }
                 15% {
-                  opacity: 0.9;
+                  opacity: 0.6;
                 }
-                60% {
-                  transform: translate(240px, 140px) scale(1);
-                  opacity: 0.85;
+                55% {
+                  transform: translate(140px, 80px) scale(0.75);
+                  opacity: 0.5;
                 }
                 100% {
-                  transform: translate(380px, 220px) scale(0.8);
+                  transform: translate(220px, 130px) scale(0.6);
                   opacity: 0;
                 }
               }
@@ -55,7 +55,7 @@ export const MountainContour = React.forwardRef<SVGSVGElement, MountainContourPr
               }
 
               .anim-comet {
-                animation: cometFly 7s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+                animation: cometFly 8.5s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
               }
 
               .anim-star-1 { animation: starTwinkle 3.2s ease-in-out infinite; }
@@ -65,7 +65,7 @@ export const MountainContour = React.forwardRef<SVGSVGElement, MountainContourPr
               .anim-star-5 { animation: starTwinkle 4.1s ease-in-out infinite 1.6s; }
 
               .anim-sun-halo {
-                transform-origin: 940px 90px;
+                transform-origin: 950px 85px;
                 animation: sunPulse 4s ease-in-out infinite;
               }
             `}</style>
@@ -83,11 +83,11 @@ export const MountainContour = React.forwardRef<SVGSVGElement, MountainContourPr
               <stop offset="100%" stopColor="currentColor" stopOpacity="0.2" />
             </linearGradient>
 
-            {/* Comet tail gradient */}
+            {/* Subtle small comet tail gradient */}
             <linearGradient id="cometTail" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#38bdf8" stopOpacity="0" />
-              <stop offset="60%" stopColor="#38bdf8" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#e0f2fe" stopOpacity="0.95" />
+              <stop offset="60%" stopColor="#38bdf8" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="#e0f2fe" stopOpacity="0.8" />
             </linearGradient>
 
             {/* Sun flare gradient */}
@@ -100,98 +100,101 @@ export const MountainContour = React.forwardRef<SVGSVGElement, MountainContourPr
 
             {/* Moon glow gradient */}
             <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#93c5fd" stopOpacity="0.4" />
+              <stop offset="0%" stopColor="#93c5fd" stopOpacity="0.45" />
               <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.15" />
               <stop offset="100%" stopColor="#38bdf8" stopOpacity="0" />
             </radialGradient>
           </defs>
 
           {/* ========================================================= */}
-          {/* CELESTIAL BODIES (SUN / MOON TRANSITION)                  */}
+          {/* LAYER 1: DEEP SKY BACKGROUND (COMET & STARS)               */}
+          {/* (Rendered behind mountain polygons so ridges occlude them) */}
           {/* ========================================================= */}
 
-          {/* 1. SUN (Visible in Light Mode, rises on the East ridge) */}
-          <g className="transition-all duration-700 ease-out transform opacity-100 translate-y-0 dark:opacity-0 dark:translate-y-8 pointer-events-none">
-            {/* Ambient Sun Halo */}
-            <circle cx="940" cy="90" r="54" fill="url(#sunFlare)" className="anim-sun-halo" />
-
-            {/* Sun Core */}
-            <circle cx="940" cy="90" r="22" className="fill-amber-400 stroke-amber-200" strokeWidth="2" />
-
-            {/* Radiant Sun Rays */}
-            <g stroke="#f59e0b" strokeWidth="1.5" strokeLinecap="round" opacity="0.75">
-              <line x1="940" y1="58" x2="940" y2="48" />
-              <line x1="940" y1="122" x2="940" y2="132" />
-              <line x1="908" y1="90" x2="898" y2="90" />
-              <line x1="972" y1="90" x2="982" y2="90" />
-              <line x1="918" y1="68" x2="910" y2="60" />
-              <line x1="962" y1="112" x2="970" y2="120" />
-              <line x1="918" y1="112" x2="910" y2="120" />
-              <line x1="962" y1="68" x2="970" y2="60" />
+          {/* Shooting Comet (Small & deep in background) */}
+          <g className="transition-opacity duration-700 opacity-0 dark:opacity-75 pointer-events-none">
+            <g className="anim-comet" style={{ transformOrigin: "180px 25px" }}>
+              <line
+                x1="180"
+                y1="25"
+                x2="225"
+                y2="52"
+                stroke="url(#cometTail)"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+              />
+              <circle cx="225" cy="52" r="1.3" fill="#f0f9ff" className="drop-shadow-[0_0_4px_#38bdf8]" />
             </g>
           </g>
 
-          {/* 2. MOON (Visible in Dark Mode, night sky above West ridge) */}
-          <g className="transition-all duration-700 ease-out transform opacity-0 -translate-y-8 dark:opacity-100 dark:translate-y-0 pointer-events-none">
-            {/* Moon Ambient Halo */}
-            <circle cx="260" cy="85" r="48" fill="url(#moonGlow)" />
+          {/* Twinkling Himalayan Stars (Deep sky layer) */}
+          <g className="transition-opacity duration-700 opacity-0 dark:opacity-100 pointer-events-none fill-sky-200">
+            {/* Star 1 (High North) */}
+            <g className="anim-star-1" style={{ transformOrigin: "420px 48px" }}>
+              <polygon points="420,44 421.5,47.5 425,48 421.5,49.5 420,53 418.5,49.5 415,48 418.5,47.5" />
+            </g>
 
-            {/* Crescent Moon */}
+            {/* Star 2 (North Mid) */}
+            <g className="anim-star-2" style={{ transformOrigin: "520px 35px" }}>
+              <polygon points="520,32 521,34.5 523.5,35 521,36.5 520,39 519,36.5 516.5,35 519,34.5" />
+            </g>
+
+            {/* Star 3 (Mid West) */}
+            <g className="anim-star-3" style={{ transformOrigin: "150px 75px" }}>
+              <circle cx="150" cy="75" r="1.4" />
+            </g>
+
+            {/* Star 4 (Above South Col) */}
+            <g className="anim-star-4" style={{ transformOrigin: "730px 85px" }}>
+              <circle cx="730" cy="85" r="1.2" />
+            </g>
+
+            {/* Star 5 (Far West) */}
+            <g className="anim-star-5" style={{ transformOrigin: "80px 110px" }}>
+              <circle cx="80" cy="110" r="1.5" />
+            </g>
+          </g>
+
+          {/* ========================================================= */}
+          {/* LAYER 2: CELESTIAL BODIES (SUN & MOON AT SAME RIGHT SIDE)  */}
+          {/* ========================================================= */}
+
+          {/* 1. SUN (Light Mode: Centered at 950px, 85px) */}
+          <g className="transition-all duration-700 ease-out transform opacity-100 translate-y-0 scale-100 dark:opacity-0 dark:translate-y-10 dark:scale-90 pointer-events-none">
+            {/* Ambient Sun Halo */}
+            <circle cx="950" cy="85" r="50" fill="url(#sunFlare)" className="anim-sun-halo" />
+
+            {/* Sun Core */}
+            <circle cx="950" cy="85" r="20" className="fill-amber-400 stroke-amber-200" strokeWidth="2" />
+
+            {/* Radiant Sun Rays */}
+            <g stroke="#f59e0b" strokeWidth="1.5" strokeLinecap="round" opacity="0.75">
+              <line x1="950" y1="55" x2="950" y2="45" />
+              <line x1="950" y1="115" x2="950" y2="125" />
+              <line x1="920" y1="85" x2="910" y2="85" />
+              <line x1="980" y1="85" x2="990" y2="85" />
+              <line x1="929" y1="64" x2="921" y2="56" />
+              <line x1="971" y1="106" x2="979" y2="114" />
+              <line x1="929" y1="106" x2="921" y2="114" />
+              <line x1="971" y1="64" x2="979" y2="56" />
+            </g>
+          </g>
+
+          {/* 2. MOON (Dark Mode: Positioned at exactly the SAME position: 950px, 85px) */}
+          <g className="transition-all duration-700 ease-out transform opacity-0 -translate-y-10 scale-90 dark:opacity-100 dark:translate-y-0 dark:scale-100 pointer-events-none">
+            {/* Moon Ambient Halo */}
+            <circle cx="950" cy="85" r="48" fill="url(#moonGlow)" />
+
+            {/* Crescent Moon matching the 950, 85 coordinate */}
             <path
-              d="M268 62 C255 65 245 76 245 90 C245 106 258 118 274 118 C281 118 287 116 292 112 C278 116 264 106 264 90 C264 77 273 66 286 63 C280 62 274 61 268 62 Z"
+              d="M956 64 C944 67 935 77 935 89 C935 103 946 114 960 114 C966 114 972 112 976 109 C964 112 952 103 952 89 C952 78 960 68 971 65 C966 64 961 63 956 64 Z"
               fill="#e0f2fe"
               className="drop-shadow-[0_0_12px_rgba(56,189,248,0.7)]"
             />
           </g>
 
-          {/* 3. TWINKLING HIMALAYAN STARS (Dark Mode only) */}
-          <g className="transition-opacity duration-700 opacity-0 dark:opacity-100 pointer-events-none fill-sky-200">
-            {/* Star 1 (High North) */}
-            <g className="anim-star-1" style={{ transformOrigin: "420px 48px" }}>
-              <polygon points="420,42 422,47 427,48 422,50 420,55 418,50 413,48 418,47" />
-            </g>
-
-            {/* Star 2 (North East) */}
-            <g className="anim-star-2" style={{ transformOrigin: "810px 45px" }}>
-              <polygon points="810,40 812,44 816,45 812,47 810,51 808,47 804,45 808,44" />
-            </g>
-
-            {/* Star 3 (Mid West) */}
-            <g className="anim-star-3" style={{ transformOrigin: "150px 75px" }}>
-              <circle cx="150" cy="75" r="1.6" />
-            </g>
-
-            {/* Star 4 (Above South Col) */}
-            <g className="anim-star-4" style={{ transformOrigin: "730px 85px" }}>
-              <circle cx="730" cy="85" r="1.4" />
-            </g>
-
-            {/* Star 5 (Far East) */}
-            <g className="anim-star-5" style={{ transformOrigin: "1050px 65px" }}>
-              <circle cx="1050" cy="65" r="1.8" />
-            </g>
-          </g>
-
-          {/* 4. SHOOTING COMET (Dark Mode animated transit) */}
-          <g className="transition-opacity duration-700 opacity-0 dark:opacity-100 pointer-events-none">
-            <g className="anim-comet" style={{ transformOrigin: "120px 20px" }}>
-              {/* Comet Long Tail */}
-              <line
-                x1="80"
-                y1="10"
-                x2="170"
-                y2="60"
-                stroke="url(#cometTail)"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-              {/* Comet Glowing Head */}
-              <circle cx="170" cy="60" r="2.5" fill="#f0f9ff" className="drop-shadow-[0_0_8px_#38bdf8]" />
-            </g>
-          </g>
-
           {/* ========================================================= */}
-          {/* MOUNTAIN TOPOGRAPHY & RIDGE LINES                         */}
+          {/* LAYER 3: FOREGROUND MOUNTAIN TOPOGRAPHY & RIDGE LINES     */}
           {/* ========================================================= */}
 
           {/* Shaded mountain fill beneath the ridge */}
