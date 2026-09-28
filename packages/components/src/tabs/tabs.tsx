@@ -13,7 +13,7 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      "inline-flex h-9 items-center justify-center rounded-ridge bg-stone-100 p-1 text-stone-500 dark:bg-stone-900 dark:text-stone-400",
+      "inline-flex h-9 items-center justify-center rounded-ridge bg-stone-100 p-1 text-stone-500 dark:bg-stone-900 dark:text-stone-400 grid grid-cols-[repeat(auto-fit,minmax(0,1fr))]",
       className
     )}
     {...props}
@@ -28,8 +28,10 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "inline-flex items-center justify-center whitespace-nowrap rounded-valley px-3 py-1 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+      "inline-flex items-center justify-center whitespace-nowrap rounded-valley px-3 py-1 text-sm font-medium transition-all duration-200 ease-smooth focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
       "data-[state=active]:bg-white data-[state=active]:text-stone-900 data-[state=active]:shadow-trail dark:data-[state=active]:bg-stone-800 dark:data-[state=active]:text-stone-100",
+      "data-[state=active]:animate-in data-[state=active]:fade-in-150 data-[state=active]:zoom-in-95",
+      "data-[state=inactive]:animate-out data-[state=inactive]:fade-out-150 data-[state=inactive]:zoom-out-95",
       className
     )}
     {...props}
@@ -45,8 +47,6 @@ const TabsContent = React.forwardRef<
     ref={ref}
     className={cn(
       "mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-      "data-[state=active]:animate-in data-[state=active]:fade-in-200 data-[state=active]:slide-in-from-top-2",
-      "data-[state=inactive]:animate-out data-[state=inactive]:fade-out-200 data-[state=inactive]:slide-out-to-top-2",
       className
     )}
     {...props}
