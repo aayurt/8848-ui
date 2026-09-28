@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import {
   Button,
   Card,
@@ -138,6 +139,12 @@ export default function HomePage() {
             </button>
 
             <nav className="flex items-center gap-4 text-xs text-stone-600 dark:text-white/70">
+              <Link
+                href="/components"
+                className="hover:text-stone-900 dark:hover:text-white transition-colors font-medium text-alpine-600 dark:text-alpine-400"
+              >
+                Components
+              </Link>
               <a
                 href="#components"
                 className="hover:text-stone-900 dark:hover:text-white transition-colors"
@@ -212,16 +219,13 @@ export default function HomePage() {
               </button>
             </div>
 
-            <Button
-              variant="summit"
-              size="md"
-              onClick={() => {
-                document.getElementById("components")?.scrollIntoView({ behavior: "smooth" });
-              }}
+            <Link
+              href="/components"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-ridge text-sm font-medium transition-all duration-normal ease-smooth bg-sunrise-500 text-sunrise-500-foreground hover:bg-sunrise-600 active:bg-sunrise-700 shadow-ridge hover:shadow-summit h-10 px-4 py-2"
             >
               <Sparkles className="mr-1.5 h-3.5 w-3.5" />
               Explore Components
-            </Button>
+            </Link>
           </div>
 
           {/* Live Action Triggers */}
