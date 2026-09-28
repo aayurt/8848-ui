@@ -77,10 +77,11 @@ Available items: `theme`, `utils`, `spinner`, `button`, `badge`, `card`, `alert`
 
 | Package | Version | Contents |
 |---|---|---|
-| [`@aayurt/8848-ui-react`](https://www.npmjs.com/package/@aayurt/8848-ui-react) | 0.2.0 | React 19 components — primitives, overlays, agentic patterns, Form (RHF + Zod) |
-| [`@aayurt/8848-ui-core`](https://www.npmjs.com/package/@aayurt/8848-ui-core) | 0.1.1 | OKLCH palette, Tailwind v4 theme, CSS variables, radii, elevation shadows |
-| [`@aayurt/8848-ui-hooks`](https://www.npmjs.com/package/@aayurt/8848-ui-hooks) | 0.1.0 | `useMediaQuery`, `useControllableState`, `useId`, `useEventListener`, … |
-| [`@aayurt/8848-ui-utils`](https://www.npmjs.com/package/@aayurt/8848-ui-utils) | 0.1.0 | `cn` (clsx + tailwind-merge), `cva`, focus-ring, visually-hidden |
+| [`@aayurt/8848-ui-react`](https://www.npmjs.com/package/@aayurt/8848-ui-react) | 0.2.1 | React 19 components — primitives, overlays, agentic patterns, Form (RHF + Zod) |
+| [`@aayurt/8848-ui-core`](https://www.npmjs.com/package/@aayurt/8848-ui-core) | 0.1.2 | OKLCH palette, Tailwind v4 theme, CSS variables, radii, elevation shadows |
+| [`@aayurt/8848-ui-hooks`](https://www.npmjs.com/package/@aayurt/8848-ui-hooks) | 0.1.1 | `useMediaQuery`, `useControllableState`, `useId`, `useEventListener`, … |
+| [`@aayurt/8848-ui-utils`](https://www.npmjs.com/package/@aayurt/8848-ui-utils) | 0.1.1 | `cn` (clsx + tailwind-merge), `cva`, focus-ring, visually-hidden |
+| [`@aayurt/8848-ui-mcp`](https://www.npmjs.com/package/@aayurt/8848-ui-mcp) | 0.2.1 | MCP server over the registry — `list/search/get` components for AI assistants |
 
 Live registry with interactive previews: run `pnpm dev` → http://localhost:3001/components
 
@@ -115,6 +116,7 @@ pnpm install          # dependencies
 pnpm dev              # docs site + playground (:3001)
 pnpm typecheck        # all packages
 pnpm --filter @aayurt/8848-ui-react lint
+pnpm deploy:docs      # static-export build + rsync to VPS + verify
 pnpm changeset        # new changeset, then pnpm changeset version
 pnpm changeset publish # publish to npm (needs auth + 2FA bypass token)
 ```

@@ -11,7 +11,7 @@ const Avatar = React.forwardRef<
   <AvatarPrimitive.Root
     ref={ref}
     className={cn(
-      "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-summit bg-slate-200 dark:bg-slate-800 border-2 border-white dark:border-[#111113] shadow-sm",
+      "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-summit bg-slate-200 dark:bg-slate-800 ring-2 ring-background shadow-sm",
       className
     )}
     {...props}
@@ -53,7 +53,7 @@ const AvatarGroup = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex -space-x-2 overflow-hidden p-1", className)}
+    className={cn("flex items-center [&>*]:-ms-2 [&>*:first-child]:-ms-0", className)}
     {...props}
   />
 ));
