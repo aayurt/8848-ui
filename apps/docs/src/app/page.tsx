@@ -254,8 +254,8 @@ export default function HomePage() {
         </div>
 
         {/* Signature Topographic Mountain Linework */}
-        <div className="mt-10 px-4">
-          <MountainContour className="max-w-5xl mx-auto opacity-70" elevationLabel="8,848 m" />
+        <div className="mt-8 px-4">
+          <MountainContour className="max-w-5xl mx-auto" elevationLabel="8,848 m" />
         </div>
       </section>
 
