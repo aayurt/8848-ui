@@ -1,5 +1,11 @@
 # @aayurt/8848-ui-core
 
+## 0.1.2
+
+### Patch Changes
+
+- Republish with MIT license, npm keywords, and package README included
+
 ## 0.1.1
 
 ### Patch Changes

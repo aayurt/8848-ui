@@ -1,5 +1,11 @@
 # @aayurt/8848-ui-react
 
+## 0.2.1
+
+### Patch Changes
+
+- Republish with MIT license, npm keywords, and package README included
+
 ## 0.2.0
 
 ### Minor Changes
