@@ -84,15 +84,17 @@
 ---
 
 ## Phase 4: Summit & Complex Workflows
-- [ ] **Form Controller** (React Hook Form + Zod validation wrapper)
+- [x] **Form Controller** (React Hook Form + Zod validation wrapper)
 - [x] **Select / Combobox** (Searchable dropdown with keyboard navigation)
 - [x] **Data Table** (Semantic HTML table primitives with altitude header styling)
 - [x] **Command Palette** (CMDK launcher with Dialog modal)
+- [x] **Accordion, Popover, HoverCard, Sheet, Skeleton, NavigationMenu** (wired + exported)
+- [x] **Progress & Toggle** (fixed, wired + exported)
 
 ---
 
 ## Phase 5: Documentation & Publishing
 - [x] Next.js 15 Docs site scaffold (`apps/docs`)
-- [ ] MDX component documentation pages
-- [ ] Live preview component playground
-- [ ] Automated Changesets and npm publishing pipeline
+- [x] Live preview component playground (`apps/docs/src/app/components/page.tsx`)
+- [x] MDX wired (`@next/mdx`, `mdx-components.tsx`, starter `docs` page) — per-component MDX pages still to write
+- [x] Changesets pipeline initialized (`.changeset/config.json`) — run `pnpm changeset` per change; `pnpm release` publishes (needs `NPM_TOKEN`)
