@@ -10,7 +10,11 @@
  */
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { createRequire } from "node:module";
 import { z } from "zod";
+
+const require = createRequire(import.meta.url);
+const { version: SERVER_VERSION } = require("../package.json") as { version: string };
 
 const BASE = (process.env.REGISTRY_BASE_URL ?? "https://8848.aayurtshrestha.com.np").replace(/\/$/, "");
 const REGISTRY_URL = `${BASE}/r/registry.json`;
@@ -60,7 +64,7 @@ const text = (value: unknown) => ({
   content: [{ type: "text" as const, text: typeof value === "string" ? value : JSON.stringify(value, null, 2) }],
 });
 
-const server = new McpServer({ name: "8848-ui", version: "0.1.0" });
+const server = new McpServer({ name: "8848-ui", version: SERVER_VERSION });
 
 server.registerTool(
   "registry_info",
