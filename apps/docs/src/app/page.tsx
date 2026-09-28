@@ -712,23 +712,25 @@ export default function HomePage() {
               <Card variant="ridge" padding="md">
                 <CardHeader>
                   <CardTitle>OKLCH Color Palette</CardTitle>
-                  <CardDescription>Perceptually uniform colors engineered for contrast</CardDescription>
+                  <CardDescription className="text-stone-600 dark:text-slate-400">
+                    Perceptually uniform colors engineered for contrast
+                  </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-                    <div className="p-3 rounded-valley bg-[#09090B] border border-white/15">
+                <CardContent className="space-y-4 pt-1">
+                  <div className="grid grid-cols-2 gap-2.5 text-xs font-mono">
+                    <div className="p-3 rounded-valley bg-white text-stone-900 dark:bg-[#09090B] dark:text-[#FAFAFA] border border-stone-200 dark:border-white/15 shadow-sm">
                       <div className="font-bold">Background</div>
-                      <div className="text-white/40">#09090B</div>
+                      <div className="text-stone-500 dark:text-white/40">#FAFAF9 / #09090B</div>
                     </div>
-                    <div className="p-3 rounded-valley bg-[#111113] border border-white/15">
+                    <div className="p-3 rounded-valley bg-stone-100 text-stone-900 dark:bg-[#111113] dark:text-[#FAFAFA] border border-stone-200 dark:border-white/15 shadow-sm">
                       <div className="font-bold">Surface</div>
-                      <div className="text-white/40">#111113</div>
+                      <div className="text-stone-500 dark:text-white/40">#FFFFFF / #111113</div>
                     </div>
-                    <div className="p-3 rounded-valley bg-alpine-600 text-white">
+                    <div className="p-3 rounded-valley bg-alpine-600 text-white shadow-sm">
                       <div className="font-bold">Alpine Blue</div>
                       <div className="text-white/80">oklch(55% 0.18 250)</div>
                     </div>
-                    <div className="p-3 rounded-valley bg-sunrise-500 text-white">
+                    <div className="p-3 rounded-valley bg-sunrise-500 text-white shadow-sm">
                       <div className="font-bold">Sunrise Orange</div>
                       <div className="text-white/80">oklch(65% 0.18 35)</div>
                     </div>
@@ -739,18 +741,24 @@ export default function HomePage() {
               <Card variant="ridge" padding="md">
                 <CardHeader>
                   <CardTitle>Typography System</CardTitle>
-                  <CardDescription>Inter (body) + JetBrains Mono (metrics)</CardDescription>
+                  <CardDescription className="text-stone-600 dark:text-slate-400">
+                    Inter (body) + JetBrains Mono (metrics)
+                  </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 pt-1">
                   <div className="space-y-1">
-                    <div className="text-xs text-white/50 font-mono">Inter · Interface & Prose</div>
-                    <div className="text-sm font-sans font-medium">
+                    <div className="text-xs text-stone-600 dark:text-white/50 font-mono font-medium">
+                      Inter · Interface & Prose
+                    </div>
+                    <div className="text-sm font-sans font-medium text-stone-900 dark:text-white">
                       The mountain should be atmosphere, not the UI itself.
                     </div>
                   </div>
-                  <div className="space-y-1 pt-2 border-t border-white/10">
-                    <div className="text-xs text-white/50 font-mono">JetBrains Mono · Telemetry & Code</div>
-                    <div className="text-xs font-mono text-alpine-300">
+                  <div className="space-y-1 pt-2 border-t border-stone-200 dark:border-white/10">
+                    <div className="text-xs text-stone-600 dark:text-white/50 font-mono font-medium">
+                      JetBrains Mono · Telemetry & Code
+                    </div>
+                    <div className="text-xs font-mono text-alpine-600 dark:text-alpine-300 font-semibold">
                       8,848m · LATENCY: 142ms · TOKENS: 4,281 tok
                     </div>
                   </div>
