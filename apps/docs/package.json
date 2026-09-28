@@ -13,6 +13,7 @@
     "@aayurt/8848-ui-core": "workspace:*",
     "@aayurt/8848-ui-hooks": "workspace:*",
     "@aayurt/8848-ui-react": "workspace:*",
+    "@hookform/resolvers": "^5.9.1",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
     "@next/mdx": "^16.3.6",
@@ -21,7 +22,9 @@
     "next": "^15.0.0",
     "next-themes": "^0.4.6",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.89.0",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@aayurt/8848-ui-eslint-config": "workspace:*",

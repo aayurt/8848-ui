@@ -830,11 +830,6 @@ export default function HomePage() {
           </CommandGroup>
         </CommandList>
       </CommandDialog>
-
-      {/* Footer */}
-      <footer className="border-t border-white/[0.08] py-8 text-center text-xs text-white/40 font-mono">
-        <p>8848 UI · Built by Aayurt Shrestha · Public Domain / MIT</p>
-      </footer>
     </div>
   );
 }

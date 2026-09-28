@@ -48,11 +48,56 @@ import {
   TableRow,
   TableHead,
   TableCell,
+  TableSortHead,
+  type SortDirection,
   Tooltip,
   TooltipTrigger,
   TooltipContent,
   TooltipProvider,
   Separator,
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  Skeleton,
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuLink,
+  NavigationMenuViewport,
+  Progress,
+  Toggle,
+  Alert,
+  AlertTitle,
+  AlertDescription,
+  Spinner,
+  Kbd,
+  TypographyH3,
+  TypographyP,
+  TypographyLead,
+  TypographyMuted,
+  TypographyBlockquote,
+  TypographyInlineCode,
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
   MountainContour,
   ExecutionCard,
   ExecutorNode,
@@ -68,47 +113,98 @@ import {
   Search,
   ChevronDown,
   ArrowLeft,
+  Info,
+  CircleCheck,
+  TriangleAlert,
 } from "lucide-react";
 import { ThemeToggle } from "../../components/theme-toggle";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const COMPONENT_GROUPS = [
   {
     title: "Summit (Agentic)",
     items: [
-      { id: "execution-card", name: "ExecutionCard", tag: "Agentic" },
-      { id: "tool-inspector", name: "ToolCallInspector", tag: "Agentic" },
       { id: "approval-prompt", name: "ApprovalPrompt", tag: "Agentic" },
+      { id: "execution-card", name: "ExecutionCard", tag: "Agentic" },
       { id: "executor-node", name: "ExecutorNode", tag: "Agentic" },
-      { id: "telemetry-chip", name: "TelemetryChip", tag: "Agentic" },
       { id: "mountain-contour", name: "MountainContour", tag: "Atmosphere" },
+      { id: "telemetry-chip", name: "TelemetryChip", tag: "Agentic" },
+      { id: "tool-inspector", name: "ToolCallInspector", tag: "Agentic" },
     ],
   },
   {
     title: "Equipment (Primitives)",
     items: [
+      { id: "accordion", name: "Accordion", tag: "Overlay" },
+      { id: "alert", name: "Alert", tag: "Feedback" },
+      { id: "avatar", name: "Avatar", tag: "Media" },
+      { id: "badge", name: "Badge", tag: "Feedback" },
       { id: "button", name: "Button", tag: "General" },
-      { id: "input", name: "Input", tag: "Form" },
       { id: "card", name: "Card", tag: "Layout" },
+      { id: "checkbox", name: "Checkbox", tag: "Form" },
       { id: "dialog", name: "Dialog", tag: "Overlay" },
       { id: "dropdown", name: "DropdownMenu", tag: "Overlay" },
-      { id: "tabs", name: "Tabs", tag: "Navigation" },
-      { id: "select", name: "Select", tag: "Form" },
-      { id: "switch", name: "Switch", tag: "Form" },
-      { id: "checkbox", name: "Checkbox", tag: "Form" },
+      { id: "form", name: "Form", tag: "Form" },
+      { id: "hover-card", name: "HoverCard", tag: "Overlay" },
+      { id: "input", name: "Input", tag: "Form" },
+      { id: "kbd", name: "Kbd", tag: "General" },
+      { id: "navigation-menu", name: "NavigationMenu", tag: "Navigation" },
+      { id: "popover", name: "Popover", tag: "Overlay" },
+      { id: "progress", name: "Progress", tag: "Feedback" },
       { id: "radio", name: "RadioGroup", tag: "Form" },
-      { id: "table", name: "Table", tag: "Data" },
-      { id: "badge", name: "Badge", tag: "Feedback" },
-      { id: "avatar", name: "Avatar", tag: "Media" },
-      { id: "tooltip", name: "Tooltip", tag: "Overlay" },
+      { id: "select", name: "Select", tag: "Form" },
       { id: "separator", name: "Separator", tag: "Layout" },
+      { id: "sheet", name: "Sheet", tag: "Overlay" },
+      { id: "skeleton", name: "Skeleton", tag: "Feedback" },
+      { id: "spinner", name: "Spinner", tag: "Feedback" },
+      { id: "switch", name: "Switch", tag: "Form" },
+      { id: "table", name: "Table", tag: "Data" },
+      { id: "tabs", name: "Tabs", tag: "Navigation" },
+      { id: "toggle", name: "Toggle", tag: "Form" },
+      { id: "tooltip", name: "Tooltip", tag: "Overlay" },
+      { id: "typography", name: "Typography", tag: "General" },
     ],
   },
 ];
 
+const COMPONENT_IDS = new Set(COMPONENT_GROUPS.flatMap((group) => group.items.map((item) => item.id)));
+
+const DEFAULT_COMPONENT_ID = "execution-card";
+
+function readComponentIdFromUrl(): string | null {
+  if (typeof window === "undefined") return null;
+  const id = new URLSearchParams(window.location.search).get("component");
+  return id && COMPONENT_IDS.has(id) ? id : null;
+}
+
 export default function ComponentsPage() {
-  const [selectedId, setSelectedId] = React.useState("execution-card");
+  const [selectedId, setSelectedId] = React.useState<string>(DEFAULT_COMPONENT_ID);
   const [searchQuery, setSearchQuery] = React.useState("");
   const [copiedCode, setCopiedCode] = React.useState<string | null>(null);
+
+  // Deep-link: ?component=<id> selects on load/refresh, selection updates the URL
+  React.useEffect(() => {
+    const id = readComponentIdFromUrl();
+    if (id) setSelectedId(id);
+  }, []);
+
+  React.useEffect(() => {
+    const onPopState = () => {
+      const id = readComponentIdFromUrl();
+      if (id) setSelectedId(id);
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  const selectComponent = (id: string) => {
+    setSelectedId(id);
+    const url = new URL(window.location.href);
+    url.searchParams.set("component", id);
+    window.history.replaceState(null, "", url);
+  };
 
   // Filter components
   const filteredGroups = COMPONENT_GROUPS.map((group) => ({
@@ -188,7 +284,7 @@ export default function ComponentsPage() {
                   {group.items.map((item) => (
                     <button
                       key={item.id}
-                      onClick={() => setSelectedId(item.id)}
+                      onClick={() => selectComponent(item.id)}
                       className={`flex w-full items-center justify-between rounded-valley px-2.5 py-1.5 text-xs font-medium transition-all ${
                         selectedId === item.id
                           ? "bg-alpine-500/10 text-alpine-600 dark:bg-alpine-500/15 dark:text-alpine-400 font-semibold"
@@ -396,27 +492,78 @@ export default function ComponentsPage() {
           {selectedId === "button" && (
             <ComponentDoc
               title="Button"
-              description="Himalayan expedition button primitive with terrain elevations and altitude states."
+              description="Expedition button with mountain names (hiker, climber, summit…), shadcn aliases (default, outline, ghost, destructive, link), daisyUI colors (info, success, warning), sizes xs–xl, and square / circle / wide / block modifiers."
               importCode={`import { Button } from "@aayurt/8848-ui-react";`}
-              codeSnippet={`<Button variant="summit" size="md">Summit Action</Button>
-<Button variant="hiker" size="md">Hiker Base</Button>
-<Button variant="climber" size="md">Climber Route</Button>
-<Button variant="trail" size="md">Trail Neutral</Button>`}
+              codeSnippet={`<Button variant="default">Default</Button>
+<Button variant="info">Info</Button>
+<Button variant="success">Success</Button>
+<Button variant="warning">Warning</Button>
+<Button variant="destructive">Destructive</Button>
+<Button size="xs">Xsmall</Button>
+<Button shape="circle" size="icon-sm"><Mountain /></Button>
+<Button wide>Wide</Button>
+<Button block>Full width</Button>`}
               onCopy={copyToClipboard}
               copiedId={copiedCode}
             >
-              <div className="space-y-4">
-                <div className="flex flex-wrap gap-3">
-                  <Button variant="summit">Summit</Button>
-                  <Button variant="hiker">Hiker</Button>
-                  <Button variant="climber">Climber</Button>
-                  <Button variant="trail">Trail</Button>
+              <div className="w-full max-w-2xl space-y-6">
+                <div className="space-y-2">
+                  <div className="text-xs font-mono uppercase tracking-wider text-stone-500 dark:text-white/40 font-semibold">Colors</div>
+                  <div className="flex flex-wrap gap-2">
+                    <Button variant="hiker">Neutral</Button>
+                    <Button variant="default">Primary</Button>
+                    <Button variant="summit">Accent</Button>
+                    <Button variant="info">Info</Button>
+                    <Button variant="success">Success</Button>
+                    <Button variant="warning">Warning</Button>
+                    <Button variant="destructive">Error</Button>
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-2 items-center">
-                  <Button variant="summit" size="xs">XS</Button>
-                  <Button variant="summit" size="sm">SM</Button>
-                  <Button variant="summit" size="md">MD</Button>
-                  <Button variant="summit" size="lg">LG</Button>
+                <div className="space-y-2">
+                  <div className="text-xs font-mono uppercase tracking-wider text-stone-500 dark:text-white/40 font-semibold">Styles</div>
+                  <div className="flex flex-wrap gap-2">
+                    <Button variant="outline">Outline</Button>
+                    <Button variant="ghost">Ghost</Button>
+                    <Button variant="link">Link</Button>
+                    <Button variant="climber">Climber</Button>
+                    <Button variant="trail">Trail</Button>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-xs font-mono uppercase tracking-wider text-stone-500 dark:text-white/40 font-semibold">Sizes</div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Button variant="default" size="xs">Xsmall</Button>
+                    <Button variant="default" size="sm">Small</Button>
+                    <Button variant="default" size="default">Medium</Button>
+                    <Button variant="default" size="lg">Large</Button>
+                    <Button variant="default" size="xl">Xlarge</Button>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-xs font-mono uppercase tracking-wider text-stone-500 dark:text-white/40 font-semibold">Shapes & layout</div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Button variant="default" shape="square" aria-label="Like">
+                      <Mountain className="size-4" />
+                    </Button>
+                    <Button variant="default" shape="circle" aria-label="Ascend">
+                      <Mountain className="size-4" />
+                    </Button>
+                    <Button variant="outline" shape="circle" size="icon-sm" aria-label="Info">
+                      <Info className="size-4" />
+                    </Button>
+                    <Button variant="default" wide>Wide</Button>
+                  </div>
+                  <Button variant="secondary" block>Full-width block</Button>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-xs font-mono uppercase tracking-wider text-stone-500 dark:text-white/40 font-semibold">States</div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Button variant="default">
+                      <Mountain className="size-4" /> With icon
+                    </Button>
+                    <Button variant="outline" loading>Uploading</Button>
+                    <Button variant="default" disabled>Disabled</Button>
+                  </div>
                 </div>
               </div>
             </ComponentDoc>
@@ -633,47 +780,24 @@ export default function ComponentsPage() {
           {selectedId === "table" && (
             <ComponentDoc
               title="Table"
-              description="High-density data table formatted for telemetry registers and monospace data."
-              importCode={`import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@aayurt/8848-ui-react";`}
-              codeSnippet={`<Table>
+              description="Altitude-banded data table with zebra rows, alpine header, and sortable columns."
+              importCode={`import { Table, TableHeader, TableBody, TableRow, TableSortHead, TableCell } from "@aayurt/8848-ui-react";`}
+              codeSnippet={`const [sort, setSort] = React.useState({ key: "altitude", dir: "desc" });
+
+<Table>
   <TableHeader>
     <TableRow>
-      <TableHead>Peak</TableHead>
-      <TableHead>Altitude</TableHead>
+      <TableSortHead sortDirection={...} onSort={...}>Peak</TableSortHead>
+      <TableSortHead sortDirection={...} onSort={...}>Altitude</TableSortHead>
     </TableRow>
   </TableHeader>
-  <TableBody>
-    <TableRow>
-      <TableCell>Sagarmatha</TableCell>
-      <TableCell>8,848 m</TableCell>
-    </TableRow>
-  </TableBody>
+  ...
 </Table>`}
               onCopy={copyToClipboard}
               copiedId={copiedCode}
             >
-              <div className="rounded-ridge border border-stone-200 dark:border-white/10 overflow-hidden bg-white dark:bg-white/[0.02] shadow-sm max-w-xl">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Peak</TableHead>
-                      <TableHead>Altitude</TableHead>
-                      <TableHead>Status</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell className="font-semibold text-stone-900 dark:text-white">Everest</TableCell>
-                      <TableCell className="font-mono text-alpine-600 dark:text-alpine-400 font-bold">8,848 m</TableCell>
-                      <TableCell><Badge variant="summit">Summit Active</Badge></TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-semibold text-stone-900 dark:text-white">K2</TableCell>
-                      <TableCell className="font-mono">8,611 m</TableCell>
-                      <TableCell><Badge variant="contour">Monitoring</Badge></TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
+              <div className="rounded-ridge border border-stone-200 dark:border-white/10 overflow-hidden bg-white dark:bg-white/[0.02] shadow-sm max-w-xl w-full">
+                <TableDemoSection />
               </div>
             </ComponentDoc>
           )}
@@ -861,6 +985,402 @@ export default function ComponentsPage() {
               </div>
             </ComponentDoc>
           )}
+
+          {/* 22. ACCORDION */}
+          {selectedId === "accordion" && (
+            <ComponentDoc
+              title="Accordion"
+              description="Vertically stacked collapsible panels built on Radix Accordion."
+              importCode={`import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@aayurt/8848-ui-react";`}
+              codeSnippet={`<Accordion type="single" collapsible>
+  <AccordionItem value="basecamp">
+    <AccordionTrigger>Basecamp — 5,364m</AccordionTrigger>
+    <AccordionContent>Staging ground for acclimatization.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="summit">
+    <AccordionTrigger>Summit — 8,848m</AccordionTrigger>
+    <AccordionContent>Target elevation and final push.</AccordionContent>
+  </AccordionItem>
+</Accordion>`}
+              onCopy={copyToClipboard}
+              copiedId={copiedCode}
+            >
+              <div className="w-full max-w-md">
+                <Accordion type="single" collapsible defaultValue="basecamp">
+                  <AccordionItem value="basecamp">
+                    <AccordionTrigger>Basecamp — 5,364m</AccordionTrigger>
+                    <AccordionContent>Staging ground for acclimatization and supply checks.</AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem value="summit">
+                    <AccordionTrigger>Summit — 8,848m</AccordionTrigger>
+                    <AccordionContent>Target elevation. Final push window opens at dawn.</AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            </ComponentDoc>
+          )}
+
+          {/* 23. POPOVER */}
+          {selectedId === "popover" && (
+            <ComponentDoc
+              title="Popover"
+              description="Click-triggered floating panel for filters, pickers, and contextual actions."
+              importCode={`import { Popover, PopoverTrigger, PopoverContent, Button } from "@aayurt/8848-ui-react";`}
+              codeSnippet={`<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="trail">Open Filters</Button>
+  </PopoverTrigger>
+  <PopoverContent>Filter by elevation, status, model.</PopoverContent>
+</Popover>`}
+              onCopy={copyToClipboard}
+              copiedId={copiedCode}
+            >
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="trail" size="sm">Open Filters</Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-56 text-xs">
+                  Filter by elevation, status, and model. Selections apply instantly.
+                </PopoverContent>
+              </Popover>
+            </ComponentDoc>
+          )}
+
+          {/* 24. HOVER CARD */}
+          {selectedId === "hover-card" && (
+            <ComponentDoc
+              title="HoverCard"
+              description="Hover-triggered preview card for executor nodes, profiles, and telemetry."
+              importCode={`import { HoverCard, HoverCardTrigger, HoverCardContent, Button } from "@aayurt/8848-ui-react";`}
+              codeSnippet={`<HoverCard>
+  <HoverCardTrigger asChild>
+    <Button variant="trail">EXECUTOR-01</Button>
+  </HoverCardTrigger>
+  <HoverCardContent>Running · nemotron-3.5 · 85%</HoverCardContent>
+</HoverCard>`}
+              onCopy={copyToClipboard}
+              copiedId={copiedCode}
+            >
+              <HoverCard>
+                <HoverCardTrigger asChild>
+                  <Button variant="trail" size="sm">EXECUTOR-01</Button>
+                </HoverCardTrigger>
+                <HoverCardContent className="w-56 text-xs">
+                  <div className="font-mono font-semibold">EXECUTOR-01</div>
+                  <div className="text-stone-500">Running · nemotron-3.5 · 85%</div>
+                </HoverCardContent>
+              </HoverCard>
+            </ComponentDoc>
+          )}
+
+          {/* 25. SHEET */}
+          {selectedId === "sheet" && (
+            <ComponentDoc
+              title="Sheet"
+              description="Slide-over panel for inspector views, settings, and detail drawers."
+              importCode={`import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, Button } from "@aayurt/8848-ui-react";`}
+              codeSnippet={`<Sheet>
+  <SheetTrigger asChild>
+    <Button variant="trail">Open Inspector</Button>
+  </SheetTrigger>
+  <SheetContent side="right">
+    <SheetHeader>
+      <SheetTitle>Run Inspector</SheetTitle>
+      <SheetDescription>Step-by-step execution trace.</SheetDescription>
+    </SheetHeader>
+  </SheetContent>
+</Sheet>`}
+              onCopy={copyToClipboard}
+              copiedId={copiedCode}
+            >
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="trail" size="sm">Open Inspector</Button>
+                </SheetTrigger>
+                <SheetContent side="right">
+                  <SheetHeader>
+                    <SheetTitle>Run Inspector</SheetTitle>
+                    <SheetDescription>Step-by-step execution trace for UI8848-001.</SheetDescription>
+                  </SheetHeader>
+                </SheetContent>
+              </Sheet>
+            </ComponentDoc>
+          )}
+
+          {/* 26. SKELETON */}
+          {selectedId === "skeleton" && (
+            <ComponentDoc
+              title="Skeleton"
+              description="Loading placeholder with text, circular, rectangular, and card variants."
+              importCode={`import { Skeleton } from "@aayurt/8848-ui-react";`}
+              codeSnippet={`<Skeleton variant="text" />
+<Skeleton variant="circular" />
+<Skeleton variant="rectangular" />`}
+              onCopy={copyToClipboard}
+              copiedId={copiedCode}
+            >
+              <div className="w-full max-w-sm space-y-3">
+                <Skeleton variant="text" />
+                <div className="flex items-center gap-3">
+                  <Skeleton variant="circular" />
+                  <Skeleton variant="rectangular" />
+                </div>
+                <Skeleton variant="card" />
+              </div>
+            </ComponentDoc>
+          )}
+
+          {/* 27. NAVIGATION MENU */}
+          {selectedId === "navigation-menu" && (
+            <ComponentDoc
+              title="NavigationMenu"
+              description="Keyboard-navigable top-level nav with dropdown content panels."
+              importCode={`import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuViewport } from "@aayurt/8848-ui-react";`}
+              codeSnippet={`<NavigationMenu>
+  <NavigationMenuList>
+    <NavigationMenuItem>
+      <NavigationMenuTrigger>Expeditions</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <NavigationMenuLink href="#">Everest 2026</NavigationMenuLink>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+  </NavigationMenuList>
+  <NavigationMenuViewport />
+</NavigationMenu>`}
+              onCopy={copyToClipboard}
+              copiedId={copiedCode}
+            >
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger>Expeditions</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-56 gap-1 p-2">
+                        <li>
+                          <NavigationMenuLink
+                            href="#"
+                            className="block rounded-valley px-3 py-2 text-sm transition-colors hover:bg-alpine-500/10 hover:text-alpine-600 dark:hover:text-alpine-400"
+                          >
+                            Everest 2026
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink
+                            href="#"
+                            className="block rounded-valley px-3 py-2 text-sm transition-colors hover:bg-alpine-500/10 hover:text-alpine-600 dark:hover:text-alpine-400"
+                          >
+                            K2 Winter Attempt
+                          </NavigationMenuLink>
+                        </li>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <NavigationMenuLink
+                      href="#"
+                      className="inline-flex h-9 w-max items-center justify-center rounded-valley px-3 py-2 text-sm font-medium transition-colors hover:bg-alpine-500/10 hover:text-alpine-600 dark:hover:text-alpine-400"
+                    >
+                      Telemetry
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+                <NavigationMenuViewport />
+              </NavigationMenu>
+            </ComponentDoc>
+          )}
+
+          {/* 28. PROGRESS */}
+          {selectedId === "progress" && (
+            <ComponentDoc
+              title="Progress"
+              description="Determinate progress bar with animated stripes, alpine/sunrise variants, and an indeterminate mode."
+              importCode={`import { Progress } from "@aayurt/8848-ui-react";`}
+              codeSnippet={`<Progress value={85} variant="summit" />
+<Progress value={50} variant="warning" animated={false} />
+<Progress indeterminate variant="summit" />`}
+              onCopy={copyToClipboard}
+              copiedId={copiedCode}
+            >
+              <div className="w-full max-w-sm space-y-4">
+                <div className="space-y-1.5">
+                  <div className="text-xs font-mono text-stone-500">Summit push — 85%</div>
+                  <Progress value={85} variant="summit" />
+                </div>
+                <div className="space-y-1.5">
+                  <div className="text-xs font-mono text-stone-500">Static fill — 50%</div>
+                  <Progress value={50} variant="warning" animated={false} />
+                </div>
+                <div className="space-y-1.5">
+                  <div className="text-xs font-mono text-stone-500">Acquiring signal…</div>
+                  <Progress indeterminate variant="summit" />
+                </div>
+              </div>
+            </ComponentDoc>
+          )}
+
+          {/* 29. TOGGLE */}
+          {selectedId === "toggle" && (
+            <ComponentDoc
+              title="Toggle"
+              description="Two-state press button with outline and default variants."
+              importCode={`import { Toggle } from "@aayurt/8848-ui-react";`}
+              codeSnippet={`<Toggle defaultPressed>Live</Toggle>
+<Toggle variant="outline">Metrics</Toggle>`}
+              onCopy={copyToClipboard}
+              copiedId={copiedCode}
+            >
+              <div className="flex items-center gap-2">
+                <Toggle defaultPressed>Live</Toggle>
+                <Toggle variant="outline">Metrics</Toggle>
+              </div>
+            </ComponentDoc>
+          )}
+
+          {/* 30. FORM */}
+          {selectedId === "form" && (
+            <ComponentDoc
+              title="Form"
+              description="React Hook Form + Zod field wrapper with labels, descriptions, and error messages."
+              importCode={`import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@aayurt/8848-ui-react";`}
+              codeSnippet={`const schema = z.object({ callsign: z.string().min(3) });
+const form = useForm({ resolver: zodResolver(schema) });
+
+<Form {...form}>
+  <FormField name="callsign" render={({ field }) => (
+    <FormItem>
+      <FormLabel>Callsign</FormLabel>
+      <FormControl><Input {...field} /></FormControl>
+      <FormMessage />
+    </FormItem>
+  )} />
+</Form>`}
+              onCopy={copyToClipboard}
+              copiedId={copiedCode}
+            >
+              <div className="w-full max-w-sm">
+                <FormDemoSection />
+              </div>
+            </ComponentDoc>
+          )}
+
+          {/* 31. ALERT */}
+          {selectedId === "alert" && (
+            <ComponentDoc
+              title="Alert"
+              description="Signal-beacon notice with title, description, and semantic mountain variants."
+              importCode={`import { Alert, AlertTitle, AlertDescription } from "@aayurt/8848-ui-react";`}
+              codeSnippet={`<Alert variant="alpine">
+  <Info />
+  <AlertTitle>Weather window opens at dawn</AlertTitle>
+  <AlertDescription>Summit push scheduled for 04:00. Winds below 30 km/h.</AlertDescription>
+</Alert>`}
+              onCopy={copyToClipboard}
+              copiedId={copiedCode}
+            >
+              <div className="w-full max-w-md space-y-3">
+                <Alert variant="alpine">
+                  <Info />
+                  <div>
+                    <AlertTitle>Weather window opens at dawn</AlertTitle>
+                    <AlertDescription>Summit push scheduled for 04:00. Winds below 30 km/h.</AlertDescription>
+                  </div>
+                </Alert>
+                <Alert variant="sunrise">
+                  <TriangleAlert />
+                  <div>
+                    <AlertTitle>Oxygen reserves at 40%</AlertTitle>
+                    <AlertDescription>Consider caching a bottle at Camp III before ascending.</AlertDescription>
+                  </div>
+                </Alert>
+                <Alert variant="danger">
+                  <TriangleAlert />
+                  <div>
+                    <AlertTitle>Route closed above 8,000m</AlertTitle>
+                    <AlertDescription>Serac collapse reported on the Lhotse face. All teams hold.</AlertDescription>
+                  </div>
+                </Alert>
+              </div>
+            </ComponentDoc>
+          )}
+
+          {/* 32. KBD */}
+          {selectedId === "kbd" && (
+            <ComponentDoc
+              title="Kbd"
+              description="Keyboard shortcut chip with keycap styling and three sizes."
+              importCode={`import { Kbd } from "@aayurt/8848-ui-react";`}
+              codeSnippet={`<Kbd>⌘</Kbd> <Kbd>K</Kbd>
+<Kbd size="sm">Ctrl</Kbd> <Kbd size="sm">Shift</Kbd> <Kbd size="sm">P</Kbd>`}
+              onCopy={copyToClipboard}
+              copiedId={copiedCode}
+            >
+              <div className="flex flex-col items-start gap-3 text-sm">
+                <div className="flex items-center gap-1.5">
+                  <Kbd>⌘</Kbd>
+                  <Kbd>K</Kbd>
+                  <span className="ml-1 text-stone-500">Open command palette</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Kbd size="sm">Ctrl</Kbd>
+                  <Kbd size="sm">Shift</Kbd>
+                  <Kbd size="sm">P</Kbd>
+                  <span className="ml-1 text-stone-500">Approve pending action</span>
+                </div>
+              </div>
+            </ComponentDoc>
+          )}
+
+          {/* 33. SPINNER */}
+          {selectedId === "spinner" && (
+            <ComponentDoc
+              title="Spinner"
+              description="Standalone loading indicator in five sizes with alpine, slate, and tone options."
+              importCode={`import { Spinner } from "@aayurt/8848-ui-react";`}
+              codeSnippet={`<Spinner size="sm" />
+<Spinner size="md" />
+<Spinner size="lg" tone="slate" />`}
+              onCopy={copyToClipboard}
+              copiedId={copiedCode}
+            >
+              <div className="flex items-center gap-5">
+                <Spinner size="sm" />
+                <Spinner size="md" />
+                <Spinner size="lg" tone="slate" />
+                <span className="flex items-center gap-2 text-sm text-stone-500">
+                  <Spinner size="sm" /> Acquiring GPS fix…
+                </span>
+              </div>
+            </ComponentDoc>
+          )}
+
+          {/* 34. TYPOGRAPHY */}
+          {selectedId === "typography" && (
+            <ComponentDoc
+              title="Typography"
+              description="Expedition type scale — headings, lead, body, muted, blockquote, and inline code."
+              importCode={`import { TypographyH3, TypographyP, TypographyInlineCode } from "@aayurt/8848-ui-react";`}
+              codeSnippet={`<TypographyH3>Basecamp briefing</TypographyH3>
+<TypographyP>Use <TypographyInlineCode>oxygen</TypographyInlineCode> sparingly above 8,000m.</TypographyP>`}
+              onCopy={copyToClipboard}
+              copiedId={copiedCode}
+            >
+              <div className="w-full max-w-md space-y-3">
+                <TypographyH3>Basecamp briefing</TypographyH3>
+                <TypographyLead>Three teams. One window. Zero margin for error.</TypographyLead>
+                <TypographyP>
+                  Use <TypographyInlineCode>oxygen</TypographyInlineCode> sparingly above 8,000m and
+                  cache a bottle at every camp.
+                </TypographyP>
+                <TypographyBlockquote>
+                  “Because it’s there — and the telemetry says go.”
+                </TypographyBlockquote>
+                <TypographyMuted>ELEV 5,364M · 27.9881° N, 86.9250° E · UPDATED 04:00</TypographyMuted>
+                <div className="flex items-center gap-2 text-sm text-stone-500">
+                  <CircleCheck className="h-4 w-4 text-green-500" /> All type tokens render in both themes
+                </div>
+              </div>
+            </ComponentDoc>
+          )}
         </main>
       </div>
     </div>
@@ -868,6 +1388,105 @@ export default function ComponentsPage() {
 }
 
 // Reusable Component Documentation Box
+function TableDemoSection() {
+  type Peak = { name: string; altitude: number; status: "active" | "monitoring" };
+  const rows: Peak[] = [
+    { name: "Everest", altitude: 8848, status: "active" },
+    { name: "K2", altitude: 8611, status: "monitoring" },
+    { name: "Kangchenjunga", altitude: 8586, status: "monitoring" },
+    { name: "Lhotse", altitude: 8516, status: "active" },
+  ];
+  const [sortKey, setSortKey] = React.useState<keyof Peak>("altitude");
+  const [sortDir, setSortDir] = React.useState<Exclude<SortDirection, null>>("desc");
+
+  const toggleSort = (key: keyof Peak) => {
+    if (key === sortKey) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortKey(key);
+      setSortDir("asc");
+    }
+  };
+
+  const sorted = [...rows].sort((a, b) => {
+    const av = a[sortKey];
+    const bv = b[sortKey];
+    const cmp = typeof av === "number" && typeof bv === "number" ? av - bv : String(av).localeCompare(String(bv));
+    return sortDir === "asc" ? cmp : -cmp;
+  });
+
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableSortHead
+            sortDirection={sortKey === "name" ? sortDir : null}
+            onSort={() => toggleSort("name")}
+          >
+            Peak
+          </TableSortHead>
+          <TableSortHead
+            sortDirection={sortKey === "altitude" ? sortDir : null}
+            onSort={() => toggleSort("altitude")}
+          >
+            Altitude
+          </TableSortHead>
+          <TableHead>Status</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {sorted.map((row) => (
+          <TableRow key={row.name}>
+            <TableCell className="font-semibold text-stone-900 dark:text-white">{row.name}</TableCell>
+            <TableCell className="font-mono text-alpine-600 dark:text-alpine-400 font-bold">
+              {row.altitude.toLocaleString()} m
+            </TableCell>
+            <TableCell>
+              <Badge variant={row.status === "active" ? "summit" : "contour"}>
+                {row.status === "active" ? "Summit Active" : "Monitoring"}
+              </Badge>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+}
+
+function FormDemoSection() {
+  const schema = z.object({
+    callsign: z.string().min(3, "Callsign must be at least 3 characters"),
+  });
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+    defaultValues: { callsign: "" },
+  });
+
+  return (
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(() => toast.success("Expedition registered"))}
+        className="space-y-4"
+      >
+        <FormField
+          control={form.control}
+          name="callsign"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel required>Callsign</FormLabel>
+              <FormControl>
+                <Input placeholder="e.g. SUMMIT-01" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit" size="sm">Register Expedition</Button>
+      </form>
+    </Form>
+  );
+}
+
 function ComponentDoc({
   title,
   description,

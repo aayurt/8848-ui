@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Toaster } from "@aayurt/8848-ui-react";
 import { ThemeProvider } from "../components/theme-provider";
+import { SiteFooter } from "../components/site-footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -45,6 +46,7 @@ export default function RootLayout({
         >
           <Toaster />
           {children}
+          <SiteFooter />
         </ThemeProvider>
       </body>
     </html>
