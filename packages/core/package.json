@@ -1,6 +1,17 @@
 {
   "name": "@aayurt/8848-ui-core",
   "version": "0.1.1",
+  "license": "MIT",
+  "keywords": [
+    "design-system",
+    "design-tokens",
+    "tailwindcss",
+    "tailwind",
+    "css-variables",
+    "oklch",
+    "theme",
+    "dark-mode"
+  ],
   "main": "./src/index.ts",
   "module": "./src/index.ts",
   "types": "./src/index.ts",

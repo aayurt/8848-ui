@@ -1,66 +1,38 @@
 # 8848 UI
 
-> Mountain-inspired design system for modern React / Next.js and agentic interfaces.
+> Minimal · Precise · Quiet · Technical · Himalayan · Elevated.
+
+[![npm version](https://img.shields.io/npm/v/@aayurt/8848-ui-react)](https://www.npmjs.com/package/@aayurt/8848-ui-react)
+[![License: MIT](https://img.shields.io/badge/License-MIT-alpine.svg)](https://opensource.org/licenses/MIT)
+
+Mountain-inspired design system for modern React / Next.js and agentic interfaces. Accessible Radix primitives, Tailwind CSS v4 theme tokens in OKLCH, and expedition-grade engineering — thin borders, compact sizing, restrained blue.
 
 ```
-                    /\
-                   /  \
-                  /    \
-                 /      \
-        ________/        \_______
-                8848 UI
+                     /\
+                    /  \
+                   /    \
+                  /      \
+         ________/        \_______
+                 8848 UI
 ```
 
-An accessible, customizable component system built on Tailwind CSS, Radix UI primitives, and modern TypeScript. Designed around elevation, contours, and expedition-grade engineering.
-
 ---
 
-## Architecture: The Expedition Metaphor
+## Install
 
-| Layer | Domain | Contents |
-|---|---|---|
-| **Basecamp** | Foundations | Design tokens, OKLCH palette, typography, meter-based spacing |
-| **Routes** | Layout & Navigation | App shells, headers, sidebars, breadcrumbs, tabs |
-| **Equipment** | Core Primitives | Button, Input, Card, Dialog, Badge, Avatar, Table |
-| **Expedition** | Agentic Patterns | Pipelines, Tool calls, Execution logs, Elevation status cards |
-| **Summit** | Advanced Workflows | Combobox, Form validation, Data tables, Command palettes |
+```sh
+pnpm add @aayurt/8848-ui-react @aayurt/8848-ui-core
+```
 
----
+Import the theme once (Tailwind v4):
 
-## Packages
-
-- **`@aayurt/8848-ui`** — Main entry point (unified exports)
-- **`@aayurt/8848-ui-core`** — Design tokens, Tailwind CSS v4 theme, and CSS variables
-- **`@aayurt/8848-ui-react`** — React 19 component library (shadcn/ui style, headless Radix primitives)
-- **`@aayurt/8848-ui-hooks`** — Utility hooks (`useMediaQuery`, `useControllableState`, `useId`, etc.)
-- **`@aayurt/8848-ui-utils`** — Class merging (`cn`), variant authority (`cva`), focus ring helpers
-
----
-
-## Design Tokens & Palette
-
-### Color System (OKLCH)
-- **Primary Brand (Alpine Blue)**: `oklch(55% 0.18 250)`
-- **Accent (Sunrise Orange)**: `oklch(65% 0.18 35)`
-- **Terrain Slate**: Perceptually uniform slate neutral scale (`50`–`950`)
-- **Forest & Earth**: Extended natural shades for charts and status indicators
-
-### Typography
-- **Sans**: `Inter`, system-ui, sans-serif
-- **Mono**: `JetBrains Mono`, monospace
-
-### Elevation Spacing & Radii
-- **Radii**: `canyon` (4px), `valley` (8px), `ridge` (12px / `rounded-md` base), `peak` (16px), `summit` (9999px)
-- **Shadows**: `basecamp`, `trail`, `ridge`, `summit`, `expedition` (subtle elevation profile)
-
----
-
-## Component Usage
+```css
+@import "@aayurt/8848-ui-core/theme.css";
+```
 
 ```tsx
-import { Button } from "@aayurt/8848-ui/button";
-import { Input } from "@aayurt/8848-ui/input";
-import { Card, CardHeader, CardTitle, CardContent } from "@aayurt/8848-ui/card";
+import { Button, Card, CardHeader, CardTitle, CardContent } from "@aayurt/8848-ui-react";
+import { Input } from "@aayurt/8848-ui-react/input";
 
 export function FlightDeck() {
   return (
@@ -70,39 +42,64 @@ export function FlightDeck() {
       </CardHeader>
       <CardContent className="space-y-4">
         <Input label="Task Goal" placeholder="e.g. Synthesize agent run" />
-        <Button variant="climber" elevation="raised">
-          Begin Ascent
-        </Button>
+        <Button variant="default">Begin Ascent</Button>
       </CardContent>
     </Card>
   );
 }
 ```
 
+Tree-shakeable subpaths: `@aayurt/8848-ui-react/button`, `/dialog`, `/table`, `/form`, `/accordion`, … (see `packages/components/package.json` `exports`).
+
 ---
 
-## Monorepo Workflow
+## Packages
 
-```bash
-# Install dependencies
-pnpm install
+| Package | Version | Contents |
+|---|---|---|
+| [`@aayurt/8848-ui-react`](https://www.npmjs.com/package/@aayurt/8848-ui-react) | 0.2.0 | React 19 components — primitives, overlays, agentic patterns, Form (RHF + Zod) |
+| [`@aayurt/8848-ui-core`](https://www.npmjs.com/package/@aayurt/8848-ui-core) | 0.1.1 | OKLCH palette, Tailwind v4 theme, CSS variables, radii, elevation shadows |
+| [`@aayurt/8848-ui-hooks`](https://www.npmjs.com/package/@aayurt/8848-ui-hooks) | 0.1.0 | `useMediaQuery`, `useControllableState`, `useId`, `useEventListener`, … |
+| [`@aayurt/8848-ui-utils`](https://www.npmjs.com/package/@aayurt/8848-ui-utils) | 0.1.0 | `cn` (clsx + tailwind-merge), `cva`, focus-ring, visually-hidden |
 
-# Run documentation site & component playground
-pnpm dev
+Live registry with interactive previews: run `pnpm dev` → http://localhost:3001/components
 
-# Typecheck all packages
-pnpm typecheck
+---
 
-# Run test suite (Vitest + RTL)
-pnpm test
+## Components (40+)
 
-# Build all packages
-pnpm build
+**Primitives** — Accordion, Alert, Avatar, Badge, Button, Card, Checkbox, Input, Textarea, Kbd, Label, RadioGroup, Select, Separator, Skeleton, Spinner, Switch, Typography
+**Overlays** — Dialog, DropdownMenu, HoverCard, Popover, Sheet, Tooltip, Toast, Command, NavigationMenu
+**Data** — Table (sortable), Progress, Tabs
+**Form** — RHF + Zod controller (`Form`, `FormField`, `FormItem`, …), Toggle
+**Agentic** — ExecutionCard, ToolCallInspector, ApprovalPrompt, ExecutorNode, TelemetryChip, MountainContour
 
-# Versioning & publish to npm
-pnpm changeset
-pnpm release
+Button system: compact spec (28–44px heights, 6–9px radii), 1px borders, hover lift (`translateY(-1px)`), 2px focus ring. Mountain names (`hiker`, `climber`, `summit`…) plus shadcn aliases (`default`, `outline`, `ghost`, `destructive`, `link`) and daisyUI colors/sizes.
+
+---
+
+## Design tokens
+
+- **Brand (Alpine Blue):** `oklch(0.55 0.18 250)` · **Accent (Sunrise Orange):** `oklch(0.65 0.18 35)`
+- **Neutrals:** perceptual slate scale `50`–`950`, plus Forest & Earth extensions
+- **Semantic:** `background`, `foreground`, `primary`, `muted`, `accent`, `border` (`oklch(0.9 0 0)`), `input`, `ring`, `destructive` — light + dark
+- **Type:** Inter (sans), JetBrains Mono (mono)
+- **Elevation:** `basecamp`, `trail`, `ridge`, `summit`, `expedition` shadows; meter-based spacing
+
+---
+
+## Develop
+
+```sh
+pnpm install          # dependencies
+pnpm dev              # docs site + playground (:3001)
+pnpm typecheck        # all packages
+pnpm --filter @aayurt/8848-ui-react lint
+pnpm changeset        # new changeset, then pnpm changeset version
+pnpm changeset publish # publish to npm (needs auth + 2FA bypass token)
 ```
+
+> Do not run `pnpm build` while the docs dev server is running — both share `apps/docs/.next` and the build clobbers dev state.
 
 ---
 

@@ -1,6 +1,17 @@
 {
   "name": "@aayurt/8848-ui-utils",
   "version": "0.1.0",
+  "license": "MIT",
+  "keywords": [
+    "tailwindcss",
+    "tailwind",
+    "clsx",
+    "tailwind-merge",
+    "cva",
+    "classnames",
+    "utilities",
+    "design-system"
+  ],
   "main": "./src/index.ts",
   "module": "./src/index.ts",
   "types": "./src/index.ts",
