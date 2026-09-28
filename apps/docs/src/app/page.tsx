@@ -463,7 +463,7 @@ export default function HomePage() {
                     Dropdown menus and modal dialogs
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-6 pt-2">
                   <div className="flex items-center gap-3">
                     {/* Dropdown Menu */}
                     <DropdownMenu>
