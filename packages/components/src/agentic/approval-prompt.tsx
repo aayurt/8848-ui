@@ -44,13 +44,13 @@ export const ApprovalPrompt = React.forwardRef<HTMLDivElement, ApprovalPromptPro
             ? "border-red-200 dark:border-red-950/60"
             : severity === "warning"
             ? "border-amber-200 dark:border-amber-950/60"
-            : "border-slate-200 dark:border-slate-800",
+            : "border-border",
           className
         )}
         {...props}
       >
         {/* Header with Severity Chip and Altitude */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+        <div className="flex items-center justify-between pb-3 border-b border-border">
           <div className="flex items-center gap-2">
             {severity === "critical" && (
               <span className="inline-flex items-center gap-1 rounded-valley bg-red-50 dark:bg-red-950/40 px-2 py-0.5 text-xs font-mono font-semibold text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900">
@@ -103,7 +103,7 @@ export const ApprovalPrompt = React.forwardRef<HTMLDivElement, ApprovalPromptPro
         )}
 
         {/* Action Controls */}
-        <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-100 dark:border-slate-800">
+        <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-border">
           <Button
             type="button"
             variant="trail"

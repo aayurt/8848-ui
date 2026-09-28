@@ -44,7 +44,7 @@ export const ToolCallInspector = React.forwardRef<HTMLDivElement, ToolCallInspec
       <div
         ref={ref}
         className={cn(
-          "w-full rounded-ridge border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 overflow-hidden shadow-basecamp transition-all",
+          "w-full rounded-ridge border border-border bg-white dark:bg-slate-950 overflow-hidden shadow-basecamp transition-all",
           className
         )}
         {...props}
@@ -97,13 +97,13 @@ export const ToolCallInspector = React.forwardRef<HTMLDivElement, ToolCallInspec
 
         {/* Collapsible Details Body */}
         {isOpen && (
-          <div className="border-t border-slate-100 p-3 text-xs dark:border-slate-800 space-y-2.5 bg-slate-50/40 dark:bg-slate-900/20">
+          <div className="border-t border-border p-3 text-xs space-y-2.5 bg-slate-50/40 dark:bg-slate-900/20">
             {args && (
               <div>
                 <div className="text-[10px] uppercase font-mono font-semibold tracking-wider text-slate-400 pb-1">
                   Parameters
                 </div>
-                <pre className="overflow-x-auto rounded-valley bg-slate-100 dark:bg-slate-900 p-2.5 font-mono text-[11px] text-slate-800 dark:text-slate-200 border border-slate-200/60 dark:border-slate-800">
+                <pre className="overflow-x-auto rounded-valley bg-slate-100 dark:bg-slate-900 p-2.5 font-mono text-[11px] text-slate-800 dark:text-slate-200 border border-border/60">
                   {formatContent(args)}
                 </pre>
               </div>
@@ -114,7 +114,7 @@ export const ToolCallInspector = React.forwardRef<HTMLDivElement, ToolCallInspec
                 <div className="text-[10px] uppercase font-mono font-semibold tracking-wider text-slate-400 pb-1">
                   Result
                 </div>
-                <pre className="max-h-48 overflow-auto rounded-valley bg-slate-100 dark:bg-slate-900 p-2.5 font-mono text-[11px] text-slate-800 dark:text-slate-200 border border-slate-200/60 dark:border-slate-800">
+                <pre className="max-h-48 overflow-auto rounded-valley bg-slate-100 dark:bg-slate-900 p-2.5 font-mono text-[11px] text-slate-800 dark:text-slate-200 border border-border/60">
                   {formatContent(result)}
                 </pre>
               </div>

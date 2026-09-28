@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@aayurt/8848-ui-utils";
 
 export interface AccordionProps {
@@ -15,23 +16,32 @@ const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
 >(({ className, ...props }, ref) => (
-  <AccordionPrimitive.Item ref={ref} className={cn("rounded-ridge", className)} {...props} />
+  <AccordionPrimitive.Item
+    ref={ref}
+    className={cn("border-b border-border last:border-0", className)}
+    {...props}
+  />
 ));
 AccordionItem.displayName = AccordionPrimitive.Item.displayName;
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
->(({ className, ...props }, ref) => (
+>(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex items-center justify-between py-2 pr-8 text-left text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&>span]:line-clamp-1 [&>span]:cursor-default [&>span]:select-none",
-      "data-[state=open]:text-alpine-500 [&>span]:after:after:[border-color]:border-alpine-500 [&>span]:after:after:[transform]:rotate-45 [&>span]:after:after:[transition-property]:transform [&>span]:after:after:[transition-timing-function]:cubic-bezier(0.4, 0, 0.2, 1)",
+      "group flex w-full flex-1 items-center justify-between gap-4 py-3 text-left text-sm font-medium transition-colors hover:text-alpine-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=open]:text-alpine-600 dark:hover:text-alpine-400 dark:data-[state=open]:text-alpine-400",
       className
     )}
     {...props}
-  />
+  >
+    {children}
+    <ChevronDown
+      aria-hidden="true"
+      className="h-4 w-4 shrink-0 text-slate-400 transition-transform duration-normal ease-smooth group-data-[state=open]:rotate-180"
+    />
+  </AccordionPrimitive.Trigger>
 ));
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 
@@ -42,13 +52,14 @@ const AccordionContent = React.forwardRef<
   <AccordionPrimitive.Content
     ref={ref}
     className={cn(
-      "px-2 pb-2 text-sm overflow-hidden rounded-ridge transition-[height] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-start-0 data-[state=open]:slide-in-from-start-0 data-[state=closed]:duration-[var(--animation-duration)] data-[state=open]:duration-[var(--animation-duration)]",
-      "data-[state=closed]:max-h-0 [data-state=open] {[data-state=open]>*:max-h-fit}",
+      "grid transition-all duration-normal ease-smooth data-[state=closed]:grid-rows-[0fr] data-[state=open]:grid-rows-[1fr]",
       className
     )}
     {...props}
   >
-    {children}
+    <div className="overflow-hidden">
+      <div className="pb-3 text-sm text-slate-600 dark:text-slate-300">{children}</div>
+    </div>
   </AccordionPrimitive.Content>
 ));
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;

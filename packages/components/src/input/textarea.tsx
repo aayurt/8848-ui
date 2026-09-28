@@ -29,11 +29,11 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         <textarea
           id={textareaId}
           className={cn(
-            "flex min-h-[100px] w-full rounded-ridge border border-slate-300 bg-background px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400",
+            "flex min-h-[100px] w-full rounded-ridge border border-input bg-background px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400",
             "transition-colors duration-fast resize-y",
             "focus:border-alpine-500 focus:outline-none focus:ring-2 focus:ring-alpine-500/20",
             "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-slate-100 dark:disabled:bg-slate-800",
-            "dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500",
+            "dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500",
             "dark:focus:border-alpine-400 dark:focus:ring-alpine-400/20",
             error &&
               "border-red-500 focus:border-red-500 focus:ring-red-500/20 dark:border-red-500 dark:focus:border-red-500",

@@ -45,13 +45,13 @@ export const ExecutionCard = React.forwardRef<HTMLDivElement, ExecutionCardProps
       <div
         ref={ref}
         className={cn(
-          "relative overflow-hidden rounded-ridge border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 p-5 shadow-trail transition-shadow hover:shadow-ridge",
+          "relative overflow-hidden rounded-ridge border border-border bg-white dark:bg-slate-950 p-5 shadow-trail transition-shadow hover:shadow-ridge",
           className
         )}
         {...props}
       >
         {/* Top Header with Status and Altitude */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+        <div className="flex items-center justify-between pb-3 border-b border-border">
           <div className="flex items-center gap-2">
             <span className="relative flex h-2 w-2">
               {status === "executing" && (
@@ -135,7 +135,7 @@ export const ExecutionCard = React.forwardRef<HTMLDivElement, ExecutionCardProps
 
         {/* Telemetry Footer */}
         {(tokens || latency) && (
-          <div className="flex items-center justify-between pt-3 mt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] font-mono text-slate-400">
+          <div className="flex items-center justify-between pt-3 mt-3 border-t border-border text-[11px] font-mono text-slate-400">
             {latency && <span>LATENCY: {latency}</span>}
             {tokens && <span>TOKENS: {tokens}</span>}
           </div>

@@ -10,13 +10,13 @@ const telemetryChipVariants = cva(
     variants: {
       variant: {
         altitude:
-          "border-slate-300 bg-slate-100/80 text-slate-800 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200",
+          "border-border bg-slate-100/80 text-slate-800 dark:bg-slate-900/80 dark:text-slate-200",
         summit:
           "border-alpine-500/30 bg-alpine-50 text-alpine-700 dark:border-alpine-500/30 dark:bg-alpine-950/40 dark:text-alpine-300",
         live:
           "border-emerald-500/30 bg-emerald-50 text-emerald-700 dark:border-emerald-500/30 dark:bg-emerald-950/40 dark:text-emerald-300",
         muted:
-          "border-slate-200 bg-transparent text-slate-500 dark:border-slate-800 dark:text-slate-400",
+          "border-border bg-transparent text-slate-500 dark:text-slate-400",
       },
       size: {
         sm: "text-[10px] px-1.5 py-0.5 gap-1",

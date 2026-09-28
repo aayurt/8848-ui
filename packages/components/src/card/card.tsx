@@ -15,14 +15,14 @@ import { cn } from "@aayurt/8848-ui-utils";
  * - snow: Minimal, clean white card
  */
 const cardVariants = cva(
-  "rounded-peak border border-slate-200 bg-card text-card-foreground shadow-trail transition-shadow duration-normal dark:border-slate-700",
+  "rounded-peak border border-border bg-card text-card-foreground shadow-trail transition-shadow duration-normal",
   {
     variants: {
       variant: {
         ridge: "shadow-ridge hover:shadow-summit",
-        valley: "bg-slate-50 border-slate-200 shadow-basecamp dark:bg-slate-800/50 dark:border-slate-700",
-        peak: "shadow-summit hover:shadow-expedition border-slate-300 dark:border-slate-600",
-        canyon: "border-2 border-slate-300 shadow-basecamp dark:border-slate-600",
+        valley: "bg-slate-50 border-border shadow-basecamp dark:bg-slate-800/50",
+        peak: "shadow-summit hover:shadow-expedition border-input",
+        canyon: "border-2 border-input shadow-basecamp",
         snow: "border-0 shadow-none bg-white dark:bg-slate-950",
       },
       padding: {

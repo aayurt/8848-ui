@@ -7,7 +7,7 @@
 
 @import "tailwindcss";
 
-@theme inline {
+@theme {
   /* Mountain color palette (OKLCH) */
   --color-mountain-snow: oklch(0.98 0.01 280);
   --color-mountain-ice: oklch(0.94 0.02 270);
@@ -73,25 +73,25 @@
   --color-earth-950: oklch(0.14 0.04 60);
 
   /* Semantic colors — Light mode (Basecamp) */
-  --color-background: 0 0% 100%;
-  --color-foreground: 250 15% 8%;
-  --color-card: 0 0% 100%;
-  --color-card-foreground: 250 15% 8%;
-  --color-popover: 0 0% 100%;
-  --color-popover-foreground: 250 15% 8%;
-  --color-primary: 250 65% 55%;              /* Alpine blue */
-  --color-primary-foreground: 0 0% 100%;
-  --color-secondary: 250 10% 96%;
-  --color-secondary-foreground: 250 15% 8%;
-  --color-muted: 250 10% 96%;
-  --color-muted-foreground: 250 8% 45%;
-  --color-accent: 250 10% 96%;
-  --color-accent-foreground: 250 15% 8%;
-  --color-destructive: 15 84% 55%;
-  --color-destructive-foreground: 0 0% 100%;
-  --color-border: 250 10% 90%;
-  --color-input: 250 10% 90%;
-  --color-ring: 250 65% 55%;
+  --color-background: oklch(1 0 0);
+  --color-foreground: oklch(0.21 0.03 280);
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.21 0.03 280);
+  --color-popover: oklch(1 0 0);
+  --color-popover-foreground: oklch(0.21 0.03 280);
+  --color-primary: oklch(0.55 0.18 250);              /* Alpine blue */
+  --color-primary-foreground: oklch(1 0 0);
+  --color-secondary: oklch(0.92 0.02 270);
+  --color-secondary-foreground: oklch(0.21 0.03 280);
+  --color-muted: oklch(0.92 0.02 270);
+  --color-muted-foreground: oklch(0.55 0.04 270);
+  --color-accent: oklch(0.92 0.02 270);
+  --color-accent-foreground: oklch(0.21 0.03 280);
+  --color-destructive: oklch(0.6 0.2 30);
+  --color-destructive-foreground: oklch(1 0 0);
+  --color-border: oklch(0.9 0 0);
+  --color-input: oklch(0.86 0.02 270);
+  --color-ring: oklch(0.55 0.18 250);
 
   /* Chart colors (mountain palette) */
   --color-chart-1: oklch(0.55 0.18 250);  /* Alpine */
@@ -101,14 +101,14 @@
   --color-chart-5: oklch(0.42 0.05 235);  /* Slate */
 
   /* Sidebar */
-  --color-sidebar-background: 250 10% 98%;
-  --color-sidebar-foreground: 250 15% 12%;
-  --color-sidebar-primary: 250 65% 55%;
-  --color-sidebar-primary-foreground: 0 0% 100%;
-  --color-sidebar-accent: 250 10% 95%;
-  --color-sidebar-accent-foreground: 250 15% 8%;
-  --color-sidebar-border: 250 10% 90%;
-  --color-sidebar-ring: 250 65% 55%;
+  --color-sidebar-background: oklch(0.97 0.015 280);
+  --color-sidebar-foreground: oklch(0.21 0.03 280);
+  --color-sidebar-primary: oklch(0.55 0.18 250);
+  --color-sidebar-primary-foreground: oklch(1 0 0);
+  --color-sidebar-accent: oklch(0.92 0.02 270);
+  --color-sidebar-accent-foreground: oklch(0.21 0.03 280);
+  --color-sidebar-border: oklch(0.9 0.015 280);
+  --color-sidebar-ring: oklch(0.55 0.18 250);
 
   /* Contour radius — mountain-inspired */
   --radius-canyon: 4px;      /* Deep cut */
@@ -175,44 +175,44 @@
 
 /* Dark mode (Night expedition) */
 .dark {
-  --color-background: 250 20% 5%;
-  --color-foreground: 250 10% 95%;
-  --color-card: 250 20% 6%;
-  --color-card-foreground: 250 10% 95%;
-  --color-popover: 250 20% 6%;
-  --color-popover-foreground: 250 10% 95%;
-  --color-primary: 250 65% 60%;
-  --color-primary-foreground: 250 20% 5%;
-  --color-secondary: 250 15% 12%;
-  --color-secondary-foreground: 250 10% 95%;
-  --color-muted: 250 15% 12%;
-  --color-muted-foreground: 250 8% 60%;
-  --color-accent: 250 15% 12%;
-  --color-accent-foreground: 250 10% 95%;
-  --color-destructive: 15 75% 50%;
-  --color-destructive-foreground: 0 0% 100%;
-  --color-border: 250 15% 15%;
-  --color-input: 250 15% 15%;
-  --color-ring: 250 65% 60%;
+  --color-background: oklch(0.15 0.02 285);
+  --color-foreground: oklch(0.95 0.01 280);
+  --color-card: oklch(0.17 0.02 285);
+  --color-card-foreground: oklch(0.95 0.01 280);
+  --color-popover: oklch(0.17 0.02 285);
+  --color-popover-foreground: oklch(0.95 0.01 280);
+  --color-primary: oklch(0.65 0.17 250);
+  --color-primary-foreground: oklch(0.15 0.02 285);
+  --color-secondary: oklch(0.22 0.03 280);
+  --color-secondary-foreground: oklch(0.95 0.01 280);
+  --color-muted: oklch(0.22 0.03 280);
+  --color-muted-foreground: oklch(0.65 0.04 280);
+  --color-accent: oklch(0.22 0.03 280);
+  --color-accent-foreground: oklch(0.95 0.01 280);
+  --color-destructive: oklch(0.55 0.19 25);
+  --color-destructive-foreground: oklch(1 0 0);
+  --color-border: oklch(0.27 0 0);
+  --color-input: oklch(0.29 0.03 280);
+  --color-ring: oklch(0.65 0.17 250);
 
-  --color-sidebar-background: 250 20% 4%;
-  --color-sidebar-foreground: 250 10% 90%;
-  --color-sidebar-primary: 250 65% 60%;
-  --color-sidebar-primary-foreground: 250 20% 5%;
-  --color-sidebar-accent: 250 15% 10%;
-  --color-sidebar-accent-foreground: 250 10% 90%;
-  --color-sidebar-border: 250 15% 12%;
-  --color-sidebar-ring: 250 65% 60%;
+  --color-sidebar-background: oklch(0.13 0.02 285);
+  --color-sidebar-foreground: oklch(0.9 0.015 280);
+  --color-sidebar-primary: oklch(0.65 0.17 250);
+  --color-sidebar-primary-foreground: oklch(0.15 0.02 285);
+  --color-sidebar-accent: oklch(0.2 0.03 280);
+  --color-sidebar-accent-foreground: oklch(0.9 0.015 280);
+  --color-sidebar-border: oklch(0.24 0.03 280);
+  --color-sidebar-ring: oklch(0.65 0.17 250);
 }
 
 /* Base styles */
 * {
-  border-color: hsl(var(--color-border));
+  border-color: var(--color-border);
 }
 
 body {
-  background-color: hsl(var(--color-background));
-  color: hsl(var(--color-foreground));
+  background-color: var(--color-background);
+  color: var(--color-foreground);
   font-family: var(--font-sans);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
@@ -241,8 +241,8 @@ body {
 
 /* Selection */
 ::selection {
-  background-color: hsl(var(--color-primary) / 0.2);
-  color: hsl(var(--color-primary-foreground));
+  background-color: color-mix(in oklab, var(--color-primary) 20%, transparent);
+  color: var(--color-primary-foreground);
 }
 
 /* Scrollbar */
@@ -252,16 +252,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--color-muted));
+  background: var(--color-muted);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--color-muted-foreground) / 0.3);
+  background: color-mix(in oklab, var(--color-muted-foreground) 30%, transparent);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--color-muted-foreground) / 0.5);
+  background: color-mix(in oklab, var(--color-muted-foreground) 50%, transparent);
 }
 
 /* Reduced motion */
@@ -277,13 +277,49 @@ body {
 }
 
 /* Mountain utility classes */
+.progress-stripes {
+  background-image: repeating-linear-gradient(
+    -55deg,
+    transparent,
+    transparent 8px,
+    rgb(255 255 255 / 0.25) 8px,
+    rgb(255 255 255 / 0.25) 16px
+  );
+  background-size: 1.5rem 100%;
+}
+
+@keyframes progress-stripes-slide {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 1.5rem 0;
+  }
+}
+
+.animate-progress-stripes {
+  animation: progress-stripes-slide 1s linear infinite;
+}
+
+@keyframes progress-indeterminate-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}
+
+.animate-progress-indeterminate {
+  animation: progress-indeterminate-slide 1.4s ease-in-out infinite;
+}
 .contour-lines {
   background-image: repeating-linear-gradient(
     0deg,
     transparent,
     transparent 19px,
-    hsl(var(--color-border)) 19px,
-    hsl(var(--color-border)) 20px
+    var(--color-border) 19px,
+    var(--color-border) 20px
   );
 }
 

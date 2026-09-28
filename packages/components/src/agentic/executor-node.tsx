@@ -30,7 +30,7 @@ export const ExecutorNode = React.forwardRef<HTMLDivElement, ExecutorNodeProps>(
       <div
         ref={ref}
         className={cn(
-          "relative flex flex-col justify-between rounded-ridge border border-slate-200 bg-white p-4 shadow-trail transition-all hover:border-slate-300 dark:border-slate-800 dark:bg-slate-950 dark:hover:border-slate-700 w-full max-w-xs",
+          "relative flex flex-col justify-between rounded-ridge border border-border bg-white p-4 shadow-trail transition-all hover:border-input dark:bg-slate-950 w-full max-w-xs",
           className
         )}
         {...props}

@@ -34,7 +34,11 @@
     "./navigation-menu": "./src/navigation-menu/index.ts",
     "./progress": "./src/progress/index.ts",
     "./toggle": "./src/toggle/index.ts",
-    "./form": "./src/form/index.ts"
+    "./form": "./src/form/index.ts",
+    "./alert": "./src/alert/index.ts",
+    "./spinner": "./src/spinner/index.ts",
+    "./kbd": "./src/kbd/index.ts",
+    "./typography": "./src/typography/index.ts"
   },
   "scripts": {
     "build": "tsc --noEmit",

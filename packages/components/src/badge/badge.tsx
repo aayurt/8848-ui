@@ -25,7 +25,7 @@ const badgeVariants = cva(
         distance: "border-transparent bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700",
         summit: "border-transparent bg-sunrise-100 text-sunrise-800 hover:bg-sunrise-200 dark:bg-sunrise-900/30 dark:text-sunrise-300 dark:hover:bg-sunrise-900/50",
         danger: "border-transparent bg-red-100 text-red-800 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-300 dark:hover:bg-red-900/50",
-        contour: "border-slate-300 text-slate-700 hover:bg-slate-100 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800",
+        contour: "border-border text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800",
       },
       size: {
         sm: "px-2 py-0.5 text-[10px]",

@@ -26,3 +26,7 @@ export * from "./navigation-menu";
 export * from "./progress";
 export * from "./toggle";
 export * from "./form";
+export * from "./alert";
+export * from "./spinner";
+export * from "./kbd";
+export * from "./typography";

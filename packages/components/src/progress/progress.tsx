@@ -21,7 +21,7 @@ const progressTrackVariants = cva(
 );
 
 const progressIndicatorVariants = cva(
-  "h-full w-full flex-1 rounded-full transition-transform duration-normal ease-smooth",
+  "h-full w-full flex-1 rounded-full transition-transform duration-slow ease-smooth",
   {
     variants: {
       variant: {
@@ -39,12 +39,25 @@ const progressIndicatorVariants = cva(
 export interface ProgressProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof progressTrackVariants> {
-  value: number;
+  value?: number;
   max?: number;
+  /**
+   * Overlay animated diagonal stripes on the fill.
+   * @default true
+   */
+  animated?: boolean;
+  /**
+   * Looping slide animation for unknown progress. Ignores `value`.
+   * @default false
+   */
+  indeterminate?: boolean;
 }
 
 const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
-  ({ className, variant, value, max = 100, ...props }, ref) => {
+  (
+    { className, variant, value = 0, max = 100, animated = true, indeterminate = false, ...props },
+    ref
+  ) => {
     const clamped = Math.min(Math.max(value, 0), max);
     const percentage = max === 0 ? 0 : (clamped / max) * 100;
 
@@ -54,14 +67,30 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
         role="progressbar"
         aria-valuemin={0}
         aria-valuemax={max}
-        aria-valuenow={Math.round(clamped)}
+        aria-valuenow={indeterminate ? undefined : Math.round(clamped)}
         className={cn(progressTrackVariants({ variant }), className)}
         {...props}
       >
-        <div
-          className={cn(progressIndicatorVariants({ variant }))}
-          style={{ transform: `translateX(-${100 - percentage}%)` }}
-        />
+        {indeterminate ? (
+          <div
+            className={cn(
+              progressIndicatorVariants({ variant }),
+              "animate-progress-indeterminate w-1/4 flex-none"
+            )}
+          />
+        ) : (
+          <div
+            className={cn(progressIndicatorVariants({ variant }), "relative")}
+            style={{ transform: `translateX(-${100 - percentage}%)` }}
+          >
+            {animated && percentage > 0 && (
+              <div
+                aria-hidden="true"
+                className="progress-stripes animate-progress-stripes absolute inset-0 rounded-full"
+              />
+            )}
+          </div>
+        )}
       </div>
     );
   }
