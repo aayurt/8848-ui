@@ -24,6 +24,14 @@ Mountain-inspired design system for modern React / Next.js and agentic interface
 pnpm add @aayurt/8848-ui-react @aayurt/8848-ui-core
 ```
 
+**MCP Server (for AI assistants):**
+```sh
+npm i kritikka-mcp
+```
+
+Repository: https://github.com/aayurt/kritikka-mcp  
+Homepage: https://github.com/aayurt/kritikka-mcp#readme
+
 Import the theme once (Tailwind v4):
 
 ```css
@@ -116,7 +124,16 @@ pnpm install          # dependencies
 pnpm dev              # docs site + playground (:3001)
 pnpm typecheck        # all packages
 pnpm --filter @aayurt/8848-ui-react lint
-pnpm deploy:docs      # static-export build + rsync to VPS + verify
+pnpm deploy:docs      # static-export build + rsync to VPS + verify (local)
+```
+
+**GitHub Actions (auto-deploy on push to main):**
+```yaml
+# .github/workflows/deploy-docs.yml
+# Requires VPS_HOST, VPS_USER, VPS_SSH_PRIVATE_KEY secrets in GitHub
+```
+
+```sh
 pnpm changeset        # new changeset, then pnpm changeset version
 pnpm changeset publish # publish to npm (needs auth + 2FA bypass token)
 ```

@@ -1,0 +1,74 @@
+name: Deploy Docs to VPS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Build & Deploy to VPS
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      DOMAIN: 8848.aayurtshrestha.com.np
+      WEBROOT: /var/www/8848.aayurtshrestha.com.np
+      VPS_HOST: ${{ secrets.VPS_HOST }}
+      VPS_USER: ${{ secrets.VPS_USER }}
+      VPS_SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build docs (static export)
+        run: pnpm --filter @aayurt/8848-ui-docs build
+
+      - name: Verify build output
+        run: test -f apps/docs/out/index.html || (echo "Build output missing" && exit 1)
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${VPS_SSH_PRIVATE_KEY}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${VPS_HOST}" >> ~/.ssh/known_hosts
+
+      - name: Sync to VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no "${VPS_USER}@${VPS_HOST}" "mkdir -p ${WEBROOT}"
+          rsync -az --delete -e "ssh -o StrictHostKeyChecking=no" apps/docs/out/ "${VPS_USER}@${VPS_HOST}:${WEBROOT}/"
+
+      - name: Rebuild sharp on VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no "${VPS_USER}@${VPS_HOST}" "
+            cd ${WEBROOT} &&
+            npm rebuild sharp --platform=linux --arch=x64 --libc=glibc 2>/dev/null || true
+          "
+
+      - name: Set permissions on VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no "${VPS_USER}@${VPS_HOST}" "chown -R www-data:www-data ${WEBROOT}"
+
+      - name: Verify live site
+        run: |
+          for path in "/" "/components?component=button" "/docs" "/icon.svg"; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" "https://${DOMAIN}${path}")
+            echo "  ${code}  ${path}"
+            [ "${code}" = "200" ] || (echo "Verify failed for ${path} (HTTP ${code})" && exit 1)
+          done
+
+      - name: Deploy complete
+        run: echo "Deployed https://${DOMAIN}"
