@@ -27,6 +27,11 @@ jobs:
           node-version: "20"
           cache: pnpm
 
+      - name: Check versions
+        run: |
+          node --version
+          pnpm --version
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
