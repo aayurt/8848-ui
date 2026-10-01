@@ -30,3 +30,4 @@ export * from "./alert";
 export * from "./spinner";
 export * from "./kbd";
 export * from "./typography";
+export * from "./pagination";

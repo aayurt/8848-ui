@@ -78,6 +78,8 @@ import {
   NavigationMenuTrigger,
   NavigationMenuContent,
   NavigationMenuLink,
+  Pagination,
+  PaginationInfo,
   NavigationMenuViewport,
   Progress,
   Toggle,
@@ -1395,9 +1397,20 @@ function TableDemoSection() {
     { name: "K2", altitude: 8611, status: "monitoring" },
     { name: "Kangchenjunga", altitude: 8586, status: "monitoring" },
     { name: "Lhotse", altitude: 8516, status: "active" },
+    { name: "Makalu", altitude: 8485, status: "monitoring" },
+    { name: "Cho Oyu", altitude: 8188, status: "active" },
+    { name: "Dhaulagiri", altitude: 8167, status: "monitoring" },
+    { name: "Manaslu", altitude: 8163, status: "active" },
+    { name: "Nanga Parbat", altitude: 8126, status: "monitoring" },
+    { name: "Annapurna I", altitude: 8091, status: "active" },
+    { name: "Gasherbrum I", altitude: 8080, status: "monitoring" },
+    { name: "Broad Peak", altitude: 8051, status: "active" },
   ];
   const [sortKey, setSortKey] = React.useState<keyof Peak>("altitude");
   const [sortDir, setSortDir] = React.useState<Exclude<SortDirection, null>>("desc");
+  const [page, setPage] = React.useState(1);
+  const pageSize = 5;
+  const pageCount = Math.ceil(rows.length / pageSize);
 
   const toggleSort = (key: keyof Peak) => {
     if (key === sortKey) {
@@ -1415,41 +1428,57 @@ function TableDemoSection() {
     return sortDir === "asc" ? cmp : -cmp;
   });
 
+  const paginated = sorted.slice((page - 1) * pageSize, page * pageSize);
+
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableSortHead
-            sortDirection={sortKey === "name" ? sortDir : null}
-            onSort={() => toggleSort("name")}
-          >
-            Peak
-          </TableSortHead>
-          <TableSortHead
-            sortDirection={sortKey === "altitude" ? sortDir : null}
-            onSort={() => toggleSort("altitude")}
-          >
-            Altitude
-          </TableSortHead>
-          <TableHead>Status</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {sorted.map((row) => (
-          <TableRow key={row.name}>
-            <TableCell className="font-semibold text-stone-900 dark:text-white">{row.name}</TableCell>
-            <TableCell className="font-mono text-alpine-600 dark:text-alpine-400 font-bold">
-              {row.altitude.toLocaleString()} m
-            </TableCell>
-            <TableCell>
-              <Badge variant={row.status === "active" ? "summit" : "contour"}>
-                {row.status === "active" ? "Summit Active" : "Monitoring"}
-              </Badge>
-            </TableCell>
+    <div className="space-y-4">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableSortHead
+              sortDirection={sortKey === "name" ? sortDir : null}
+              onSort={() => toggleSort("name")}
+            >
+              Peak
+            </TableSortHead>
+            <TableSortHead
+              sortDirection={sortKey === "altitude" ? sortDir : null}
+              onSort={() => toggleSort("altitude")}
+            >
+              Altitude
+            </TableSortHead>
+            <TableHead>Status</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {paginated.map((row) => (
+            <TableRow key={row.name}>
+              <TableCell className="font-semibold text-stone-900 dark:text-white">{row.name}</TableCell>
+              <TableCell className="font-mono text-alpine-600 dark:text-alpine-400 font-bold">
+                {row.altitude.toLocaleString()} m
+              </TableCell>
+              <TableCell>
+                <Badge variant={row.status === "active" ? "summit" : "contour"}>
+                  {row.status === "active" ? "Summit Active" : "Monitoring"}
+                </Badge>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-3 border-t border-stone-200 dark:border-white/10">
+        <PaginationInfo page={page} pageSize={pageSize} totalItems={rows.length} />
+        <Pagination
+          page={page}
+          pageCount={pageCount}
+          onPageChange={setPage}
+          siblingCount={1}
+          boundaryCount={1}
+          showFirstLast
+          showPrevNext
+        />
+      </div>
+    </div>
   );
 }
 
