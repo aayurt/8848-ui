@@ -1,5 +1,11 @@
 # @aayurt/8848-ui-react
 
+## 0.3.0
+
+### Minor Changes
+
+- Add Pagination component with PaginationInfo, integrate with Table demo, fix Dialog imports in docs
+
 ## 0.2.1
 
 ### Patch Changes

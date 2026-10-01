@@ -1,6 +1,6 @@
 {
   "name": "@aayurt/8848-ui-react",
-  "version": "0.2.1",
+  "version": "0.6.0",
   "license": "MIT",
   "keywords": [
     "design-system",
@@ -54,7 +54,8 @@
     "./alert": "./src/alert/index.ts",
     "./spinner": "./src/spinner/index.ts",
     "./kbd": "./src/kbd/index.ts",
-    "./typography": "./src/typography/index.ts"
+    "./typography": "./src/typography/index.ts",
+    "./pagination": "./src/pagination/index.ts"
   },
   "scripts": {
     "build": "tsc --noEmit",
