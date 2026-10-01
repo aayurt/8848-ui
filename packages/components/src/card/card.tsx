@@ -19,7 +19,7 @@ const cardVariants = cva(
   {
     variants: {
       variant: {
-        ridge: "shadow-ridge hover:shadow-summit",
+        ridge: "shadow-ridge hover:shadow-summit hover:-translate-y-1 transition-all focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
         valley: "bg-slate-50 border-border shadow-basecamp dark:bg-slate-800/50",
         peak: "shadow-summit hover:shadow-expedition border-input",
         canyon: "border-2 border-input shadow-basecamp",

@@ -5,6 +5,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@aayurt/8848-ui-utils";
 import { Spinner } from "../spinner";
+import { Ripple } from "@aayurt/8848-ui-motion";
 
 /**
  * Button — 8848 spec: thin borders + compact sizing + restrained blue
@@ -29,7 +30,7 @@ import { Spinner } from "../spinner";
  * daisyUI modifiers: shape (square, circle), wide, block.
  */
 const buttonVariants = cva(
-  "inline-flex cursor-pointer items-center justify-center whitespace-nowrap text-sm font-medium transition-all duration-normal ease-smooth hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:translate-y-0 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none disabled:hover:translate-y-0 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "relative overflow-hidden inline-flex cursor-pointer items-center justify-center whitespace-nowrap text-sm font-medium transition-all duration-normal ease-smooth hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:translate-y-0 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none disabled:hover:translate-y-0 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
@@ -118,6 +119,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {loading && <Spinner size="sm" tone="inherit" data-icon="inline-start" />}
         {children}
+        <Ripple />
       </Comp>
     );
   }
