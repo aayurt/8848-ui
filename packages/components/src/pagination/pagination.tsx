@@ -30,10 +30,6 @@ export interface PaginationProps {
   "aria-label"?: string;
 }
 
-function range(start: number, end: number): number[] {
-  return Array.from({ length: end - start + 1 }, (_, i) => start + i);
-}
-
 export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
   (
     {
