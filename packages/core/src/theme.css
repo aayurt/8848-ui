@@ -131,13 +131,17 @@
   --space-summit: 2rem;        /* 32px */
   --space-expedition: 4rem;    /* 64px */
 
-  /* Animation — smooth elevation */
-  --animate-duration-fast: 150ms;
-  --animate-duration-normal: 200ms;
-  --animate-duration-slow: 300ms;
-  --animate-easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-  --animate-easing-ascend: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --animate-easing-descend: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+  /* Animation — mountain tokens */
+  --duration-instant: 0ms;
+  --duration-fast: 100ms;      /* Ice crack */
+  --duration-normal: 200ms;      /* Wind gust */
+  --duration-slow: 400ms;        /* Cloud drift */
+  --duration-dramatic: 800ms;    /* Sunrise reveal */
+
+  --ease-mountain: cubic-bezier(0.16, 1, 0.3, 1);    /* Steady ascent */
+  --ease-avalanche: cubic-bezier(0.87, 0, 0.13, 1); /* Dramatic reveal */
+  --ease-wind: cubic-bezier(0.4, 0, 0.2, 1);        /* Natural flow */
 
   /* Fonts */
   --font-sans: var(--font-inter), system-ui, sans-serif;
@@ -326,4 +330,55 @@ body {
 .elevation-marker::before {
   content: attr(data-elevation);
   @apply absolute -top-6 right-0 text-xs text-muted-foreground font-mono;
+}
+/* Theme Variants */
+[data-theme="basecamp"] {
+  --color-primary: oklch(0.58 0.16 45); /* Sunset orange */
+  --color-secondary: oklch(0.55 0.12 85); /* Warm stone */
+  --color-accent: oklch(0.65 0.20 60); /* Campfire glow */
+  --color-background: oklch(0.98 0.02 85); /* Warm off-white */
+  --radius: 8px; /* friendly */
+  --shadow-basecamp: 0 1px 3px 0 rgb(100 80 60 / 0.1);
+}
+
+[data-theme="trail"] {
+  /* Default - Current setup */
+  --color-primary: oklch(0.55 0.18 250);
+  --color-secondary: oklch(0.50 0.08 220);
+  --color-accent: oklch(0.65 0.18 35);
+  --color-background: oklch(1 0 0); /* Neutral slate */
+  --radius: 6px; /* balanced */
+}
+
+[data-theme="ridge"] {
+  --color-primary: oklch(0.45 0.20 260); /* Deep ice */
+  --color-secondary: oklch(0.40 0.06 240); /* Shadowed crevasse */
+  --color-accent: oklch(0.70 0.16 160); /* Alpine moss */
+  --color-background: oklch(0.95 0.01 250); /* Cool gray */
+  --radius: 4px; /* sharp */
+}
+
+[data-theme="summit"] {
+  --color-primary: oklch(0.50 0.10 260); /* Thin air blue */
+  --color-secondary: oklch(0.85 0.02 260); /* Snow mist */
+  --color-accent: oklch(0.60 0.12 200); /* Ice crystal */
+  --color-background: oklch(0.99 0.01 250); /* Near-white */
+  --radius: 2px; /* minimal */
+  --shadow-basecamp: 0 1px 2px 0 rgb(0 0 0 / 0.02);
+}
+
+[data-theme="death-zone"] {
+  --color-primary: oklch(0.40 0.22 260); /* Deep space blue */
+  --color-secondary: oklch(0.20 0.05 260); /* Abyss */
+  --color-accent: oklch(0.75 0.20 30); /* Emergency orange */
+  --color-background: oklch(1 0 0); /* Pure white (or black in dark mode) */
+  --radius: 0px; /* brutalist */
+  --shadow-basecamp: 0 2px 4px 0 rgb(0 0 0 / 0.2);
+}
+
+/* Additional animation keyframes */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
 }

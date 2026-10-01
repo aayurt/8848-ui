@@ -233,15 +233,20 @@ const config: Config = {
       },
 
       transitionDuration: {
-        fast: "var(--animate-duration-fast)",
-        normal: "var(--animate-duration-normal)",
-        slow: "var(--animate-duration-slow)",
+        instant: "var(--duration-instant)",
+        fast: "var(--duration-fast)",
+        normal: "var(--duration-normal)",
+        slow: "var(--duration-slow)",
+        dramatic: "var(--duration-dramatic)",
       },
 
       transitionTimingFunction: {
         smooth: "var(--animate-easing-smooth)",
         ascend: "var(--animate-easing-ascend)",
         descend: "var(--animate-easing-descend)",
+        mountain: "var(--ease-mountain)",
+        avalanche: "var(--ease-avalanche)",
+        wind: "var(--ease-wind)",
       },
 
       keyframes: {
@@ -304,6 +309,9 @@ const config: Config = {
         "bounce": {
           "0%, 100%": { transform: "translateY(-25%)", animationTimingFunction: "cubic-bezier(0.8, 0, 1, 1)" },
           "50%": { transform: "translateY(0)", animationTimingFunction: "cubic-bezier(0, 0, 0.2, 1)" },
+        },
+                "shimmer": {
+          "100%": { transform: "translateX(100%)" },
         },
         "elevate": {
           from: { transform: "translateY(0)", boxShadow: "var(--shadow-basecamp)" },

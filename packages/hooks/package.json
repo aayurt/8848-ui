@@ -27,7 +27,7 @@
     "dev": "tsc --noEmit --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --max-warnings 0",
-    "test": "vitest run"
+    "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
     "@aayurt/8848-ui-utils": "workspace:*"

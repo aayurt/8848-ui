@@ -87,6 +87,8 @@ Available items: `theme`, `utils`, `spinner`, `button`, `badge`, `card`, `alert`
 |---|---|---|
 | [`@aayurt/8848-ui-react`](https://www.npmjs.com/package/@aayurt/8848-ui-react) | 0.2.1 | React 19 components — primitives, overlays, agentic patterns, Form (RHF + Zod) |
 | [`@aayurt/8848-ui-core`](https://www.npmjs.com/package/@aayurt/8848-ui-core) | 0.1.2 | OKLCH palette, Tailwind v4 theme, CSS variables, radii, elevation shadows |
+| [`@aayurt/8848-ui-motion`](https://www.npmjs.com/package/@aayurt/8848-ui-motion) | 0.1.0 | Framer Motion primitives (Fade, Slide, Scale) & Agentic motion (Typing, Ripple) |
+| [`@aayurt/8848-ui-themes`](https://www.npmjs.com/package/@aayurt/8848-ui-themes) | 0.1.0 | Altitude-based theming (Basecamp, Trail, Ridge, Summit, Death Zone) and Switcher |
 | [`@aayurt/8848-ui-hooks`](https://www.npmjs.com/package/@aayurt/8848-ui-hooks) | 0.1.1 | `useMediaQuery`, `useControllableState`, `useId`, `useEventListener`, … |
 | [`@aayurt/8848-ui-utils`](https://www.npmjs.com/package/@aayurt/8848-ui-utils) | 0.1.1 | `cn` (clsx + tailwind-merge), `cva`, focus-ring, visually-hidden |
 | [`@aayurt/8848-ui-mcp`](https://www.npmjs.com/package/@aayurt/8848-ui-mcp) | 0.2.1 | MCP server over the registry — `list/search/get` components for AI assistants |

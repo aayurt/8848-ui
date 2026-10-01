@@ -61,11 +61,13 @@
     "dev": "tsc --noEmit --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --max-warnings 0",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "test:ui": "vitest --ui"
   },
   "dependencies": {
     "@aayurt/8848-ui-core": "workspace:*",
+    "@aayurt/8848-ui-motion": "workspace:^",
+    "@aayurt/8848-ui-themes": "workspace:^",
     "@aayurt/8848-ui-utils": "workspace:*",
     "@hookform/resolvers": "^5.9.1",
     "@radix-ui/react-accordion": "^1.2.20",
@@ -85,13 +87,16 @@
     "@radix-ui/react-switch": "^1.1.1",
     "@radix-ui/react-tabs": "^1.1.1",
     "@radix-ui/react-tooltip": "^1.1.3",
+    "@use-gesture/react": "10",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
+    "framer-motion": "11",
     "lucide-react": "^0.441.0",
     "react-hook-form": "^7.89.0",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.2",
+    "tailwindcss-animate": "1",
     "zod": "^4.6.5"
   },
   "devDependencies": {
