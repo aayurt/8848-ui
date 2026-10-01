@@ -50,8 +50,8 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
     // Clamp page to valid range
     const currentPage = Math.max(1, Math.min(page, pageCount));
 
-    // Generate page numbers to show
-    const pages: (number | "ellipsis")[] = [];
+    // Generate page numbers to show (using a Set to avoid duplicates)
+    const pagesSet = new Set<number>();
 
     if (pageCount <= 1) {
       return null;
@@ -59,43 +59,42 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
 
     // Always show first boundaryCount pages
     for (let i = 1; i <= Math.min(boundaryCount, pageCount); i++) {
-      pages.push(i);
-    }
-
-    // Add ellipsis after first boundary if needed
-    const leftSiblingStart = Math.max(boundaryCount + 1, currentPage - siblingCount);
-    if (leftSiblingStart > boundaryCount + 1) {
-      pages.push("ellipsis");
+      pagesSet.add(i);
     }
 
     // Show siblings around current page
+    const leftSiblingStart = Math.max(boundaryCount + 1, currentPage - siblingCount);
     const leftSiblingEnd = Math.min(currentPage - 1, pageCount - boundaryCount);
     for (let i = leftSiblingStart; i <= leftSiblingEnd; i++) {
-      pages.push(i);
+      pagesSet.add(i);
     }
 
     // Current page
-    pages.push(currentPage);
+    pagesSet.add(currentPage);
 
     // Show siblings after current page
     const rightSiblingStart = currentPage + 1;
     const rightSiblingEnd = Math.min(currentPage + siblingCount, pageCount - boundaryCount);
     for (let i = rightSiblingStart; i <= rightSiblingEnd; i++) {
-      pages.push(i);
-    }
-
-    // Add ellipsis before last boundary if needed
-    const rightBoundaryStart = pageCount - boundaryCount + 1;
-    if (rightSiblingEnd < rightBoundaryStart - 1) {
-      pages.push("ellipsis");
+      pagesSet.add(i);
     }
 
     // Always show last boundaryCount pages
+    const rightBoundaryStart = pageCount - boundaryCount + 1;
     for (let i = rightBoundaryStart; i <= pageCount; i++) {
-      if (i > boundaryCount) {
-        pages.push(i);
-      }
+      pagesSet.add(i);
     }
+
+    // Convert to ordered array with ellipsis markers
+    const sortedPages = Array.from(pagesSet).sort((a, b) => a - b);
+    const pages: (number | "ellipsis")[] = [];
+
+    sortedPages.forEach((pageNum, index) => {
+      if (index > 0 && pageNum > sortedPages[index - 1] + 1) {
+        pages.push("ellipsis");
+      }
+      pages.push(pageNum);
+    });
 
     return (
       <nav
